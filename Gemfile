@@ -72,3 +72,7 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem 'dotenv-rails', groups: [:development, :test]
+
+gem 'cloudinary', '~> 1.16.0'
