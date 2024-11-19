@@ -1,21 +1,21 @@
-<div class="home-background">
-  <div class="title">
-    <h1>AirFriends</h1>
-    <p>Have fun, make new friends.</p>
-  </div>
+<div class="title">
+  <h1>AirFriends</h1>
+  <p>Have fun, make new friends.</p>
 </div>
-<!-- End of Selection -->
+<div class="home-background"></div>
 
-<h2 class="mt-3 text-center">Trending friends</h2>
-<hr class="mt-3 ms-3 me-3">
+<div class="trending-friends">
+  <h2 class="text-center">Trending friends</h2>
+  <hr class="ms-4 me-4">
+</div>
 
 <div class="row g-0">
   <% users_to_display = @users.select { |user| ["Dua Lipa", "Kylian Mbappé", "Kanye West"].include?(user.name) } %>
   <% users_to_display.each do |user| %>
-    <div class="col-md-4 mb-3 g-0">
-      <div class="card" style="max-width: 300px; height: 550px; margin: auto; border-radius: 24px; background: #ffffff; box-shadow:  9px 9px 21px #949494, -9px -9px 21px #ffffff; position: relative; border: 2px solid #e0e0e0;">
+    <div class="col-md-4 mb-2">
+      <div class="card">
         <div class="text-center">
-          <img src="<%= user.image_url %>" class="img-fluid" alt="<%= user.name %>" style="width: 280px; height: 280px; object-fit: cover; border-radius: 24px; margin: 10px 10px 0 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);">
+          <img src="<%= user.image_url %>" class="img-fluid" alt="<%= user.name %>" style="width: 100%; height: auto; max-width: 280px; border-radius: 24px; margin: 10px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); transition: transform 0.3s;">
         </div>
         <div class="card-body">
           <h5 class="card-title text-center" style="font-size: 1.2em; color: #333;"><%= user.name %></h5>
@@ -23,7 +23,7 @@
           <p class="card-text-activities" style="font-size: 0.9em; color: #333;">Activities :</p>
           <ul class="card-text-activities-list" style="font-size: 0.9em; color: #555;"><%= user.activities.map { |activity| "<li>#{activity.name}</li>" }.join.html_safe %></ul>
         <div class="text-center mt-3">
-          <%= link_to 'Book', "/show?user_id=#{user.id}", class: 'btn btn-danger' %>
+          <%= link_to 'Book', "/show?user_id=#{user.id}", class: 'btn btn-outline-danger' %>
         </div>
         </div>
       </div>
