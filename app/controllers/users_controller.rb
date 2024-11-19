@@ -1,7 +1,12 @@
 class UsersController < ApplicationController
 
   def index
-    @users = User.all
-    @users_loc = User.where("location ILIKE ?", "%#{params[:query]}%")
+    if params[:query].present?
+      @users = User.where("location ILIKE ?", "%#{params[:query]}%")
+    else
+      @users = User.all
+    end
+
+
   end
 end
