@@ -1,0 +1,36 @@
+<div class="container d-flex justify-content-center mt-5">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="input-group">
+        <span class="input-group-text">
+          <i class="fa-solid fa-location-dot"></i>
+        </span>
+        <%= text_field_tag :query, params[:query], class: "form-control me-3", type: "search", placeholder: "Search location", "aria-label": "Search" %>
+      </div>
+    </div>
+    <div class="col-md-2 d-flex justify-content-center align-items-center">
+      <%= submit_tag "Search", class: "btn btn-info ms-3" %>
+      <div class="border rounded p-2 ms-3 d-flex justify-content-center align-items-center">
+        <i class="fa-solid fa-filter"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<% @users.each do |user| %>
+<div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="<%= user.image_url %>" alt="Card image cap">
+  <div class="row">
+    <p><%= user.name %> | <%= user.age %> | <%= user.gender %> |     <%= user.location %></p>
+
+
+<% user.activities.each do |activity| %>
+<p>- <%= activity.name %> | <%=activity.price%> </p>
+<% end %>
+
+</div>
+</div>
+<% end %>
