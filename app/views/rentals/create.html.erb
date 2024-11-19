@@ -1,0 +1,15 @@
+<h1>New Rental</h1>
+
+<%= simple_form_for [@rental] do |f| %>
+  <!-- Input for booking date -->
+  <%= f.input :booking_date, label: "Booking Date", as: :date %>
+
+  <!-- Dropdown for activity selection -->
+  <%= f.association :activity,
+              collection: @user.activities,
+              label: "Choose an Activity",
+              prompt: "Select an activity" %>
+
+  <!-- Submit button -->
+  <%= f.submit "Submit Rental", class: "btn btn-primary" %>
+<% end %>
