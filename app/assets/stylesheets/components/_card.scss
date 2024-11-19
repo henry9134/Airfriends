@@ -1,0 +1,31 @@
+.card {
+  max-width: 300px;
+  height: 550px;
+  margin: auto;
+  border-radius: 24px;
+  background: #ffffff;
+  box-shadow: 9px 9px 21px #949494, -9px -9px 21px #ffffff;
+  position: relative;
+  border: 2px solid #e0e0e0;
+}
+
+.card-title {
+  font-size: 1.2em;
+  color: #333;
+}
+
+.card-text {
+  text-align: center;
+  font-size: 0.9em;
+  color: #666;
+}
+
+.card-text-activities {
+  font-size: 0.9em;
+  color: #555;
+}
+
+.btn-danger {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
