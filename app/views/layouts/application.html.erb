@@ -11,9 +11,41 @@
   </head>
 
   <body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container mb-1 mt-1">
+        <a class="navbar-brand ms-3" href="/index">AirFriends</a>
+        <button
+            data-mdb-collapse-init
+            class="navbar-toggler"
+            type="button"
+            data-mdb-target="#navbarButtonsExample"
+            aria-controls="navbarButtonsExample"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+        >
+            <i class="fas fa-bars"></i>
+        </button>
 
-    <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+        <div class="collapse navbar-collapse" id="navbarButtonsExample">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Dashboard</a>
+                </li>
+            </ul>
+
+            <div class="d-flex align-items-center">
+                <button data-mdb-ripple-init type="button" class="btn btn-outline-danger px-3 me-2">
+                    Login
+                </button>
+                <button data-mdb-ripple-init type="button" class="btn btn-danger me-3">
+                    Sign up for free
+                </button>
+            </div>
+        </div>
+    </div>
+</nav>
     <%= yield %>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
   </body>
 </html>
