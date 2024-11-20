@@ -16,7 +16,10 @@
   <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);">
   <div class="container justify-content-center">
-    <%= link_to image_tag('logo.png', class: 'navbar-brand', alt: 'AirFriends Logo', size: "50x60", style: "filter: brightness(0) invert(1);"), '/', class: 'navbar-brand' %>
+    <div class="d-flex align-items-center">
+      <%= link_to image_tag('logo.png', class: 'navbar-brand', alt: 'AirFriends Logo', size: "50x60", style: "filter: brightness(0) invert(1);"), '/', class: 'navbar-brand' %>
+      <%= link_to "AirFriends", root_path, class: "ms-2 text-white", style: "font-size: 1.5em; text-decoration: none; margin-left: 0;" %>
+    </div>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarButtonsExample" aria-controls="navbarButtonsExample" aria-expanded="false" aria-label="Toggle navigation">
       <i class="fas fa-bars"></i>
     </button>
@@ -48,4 +51,11 @@
     <%= yield %>
     <%= render "shared/flashes" %>
   </body>
+<footer class="bg-dark text-white text-center py-3" style="position: relative; bottom: 0; width: 100%;">
+  <div class="container mb-3 mt-2">
+    <p class="mb-0">© 2024 AirFriends. All rights reserved.</p>
+    <a href="/privacy" class="text-white">Privacy Policy</a> |
+    <a href="/terms" class="text-white">Terms of Service</a>
+  </div>
+</footer>
 </html>
