@@ -1,0 +1,26 @@
+<div class ='dashboard_page'>
+  <div class ='User-info'>
+    <div class ='profile picture'>
+  <%= cl_image_tag @user.photo.key, style: "width: 280px; height: 280px; object-fit: cover; border-radius: 24px; margin: 10px 10px 0 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);" %>
+    </div>
+
+    <div class ='user-details'>
+      <h2> <%= @user.name %> | <%= @user.age %> | <%= @user.gender %></h2>
+      <h2> <%= @user.description%> <%= @user.location %>
+    </div>
+  </div>
+
+  <div class ='links'>
+    <% if @upcoming_rentals.present?%>
+    <% @upcoming_rentals.each do |rental| %>
+    <p><%= rental.booking_date %></p>
+    <p><%= rental.activity.name %></p>
+    <% end %>
+    <% else %>
+    <p>No upcoming rentals.</p>
+    <% end %>
+
+
+
+
+  </div>
