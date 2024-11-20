@@ -212,7 +212,8 @@ users.each do |user_hash|
 end
 
 User.all.each do |user|
-  activity = user.activities.sample
+  new_user = User.where.not(id: user).sample
+  activity = new_user.activities.sample
   booking_date = Date.today + rand(1..30).days
   Rental.create(user: user, activity: activity, booking_date: booking_date)
 end
