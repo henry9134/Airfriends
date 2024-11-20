@@ -8,7 +8,7 @@
           </span>
           <%= text_field_tag :query, params[:query], class: "form-control", type: "search", placeholder: "Search location", "aria-label": "Search" %>
         </div>
-        <%= submit_tag "Search", class: "btn btn-info ms-3" %>
+        <%= submit_tag "Search", class: "btn btn-danger ms-3" %>
       <% end %>
         <div class="">
         <i class="fa-solid fa-filter p-3"></i>
@@ -20,22 +20,28 @@
 
 
 
-
 <div class="row g-0">
   <% @users.each do |user| %>
-    <div class="col-md-3 mb-3 g-0">
-      <div class="card" style="max-width: 300px; height: 550px; margin: auto; border-radius: 24px; background: #ffffff; box-shadow:  9px 9px 21px #949494, -9px -9px 21px #ffffff; position: relative; border: 2px solid #e0e0e0;">
+    <div class="col-md-3 mb-5 g-0">
+      <div class="card" style="max-width: 300px; height: 550px; margin: auto; border-radius: 24px; background: #ffffff; box-shadow:  9px 9px 21px #cccccc, -9px -9px 21px #ffffff; position: relative; border: 2px solid #e0e0e0;">
         <div class="text-center">
-          <img src="<%= user.image_url %>" class="img-fluid" alt="<%= user.name %>" style="width: 280px; height: 280px; object-fit: cover; border-radius: 24px; margin: 10px 10px 0 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);">
+          <%= cl_image_tag user.photo.key, style: "width: 280px; height: 280px; object-fit: cover; border-radius: 24px; margin: 10px 10px 0 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);" %>
         </div>
         <div class="card-body">
           <h5 class="card-title text-center" style="font-size: 1.2em; color: #333;"><%= user.name %></h5>
           <p class="card-text-age" style="text-align: center; font-size: 0.9em; color: #666;">Age : <%= user.age %> | Location: <%= user.location %></p>
           <p class="card-text-activities" style="font-size: 0.9em; color: #333;">Activities :</p>
-          <ul class="card-text-activities-list" style="font-size: 0.9em; color: #555;"><%= user.activities.map { |activity| "<li>#{activity.name}</li>" }.join.html_safe %></ul>
-        <div class="text-center mt-3">
-          <%= link_to 'Book', "/show?user_id=#{user.id}", class: 'btn btn-danger' %>
-        </div>
+          <% if user.activities.any? %>
+            <ul class="card-text-activities-list" style="font-size: 0.9em; color: #555;"><%= user.activities.map { |activity| "<li>#{activity.name}</li>" }.join.html_safe %></ul>
+            <div class="text-center mt-3">
+              <%= link_to 'Book', "/users/#{user.id}", class: 'btn btn-danger' %>
+            </div>
+          <% else %>
+            <p class="text-center" style="font-size: 0.9em; color: #666;"><%= "#{user.name} has no activities yet." %></p>
+            <div class="text-center mt-3" style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);">
+              <button class="btn btn-danger" disabled>Book</button>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>

@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_one_attached :photo
   has_many :activities
   has_many :rentals
   # Include default devise modules. Others available are:
