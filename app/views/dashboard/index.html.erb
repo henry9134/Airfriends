@@ -11,14 +11,23 @@
   </div>
 
   <div class ='links'>
-    <% if @upcoming_rentals.present?%>
-    <% @upcoming_rentals.each do |rental| %>
-    <p><%= rental.booking_date %></p>
-    <p><%= rental.activity.name %></p>
+    <% if @upcoming_bookings.present?%>
+    <% @upcoming_bookings.each do |booking| %>
+    <p><%= booking.booking_date %> | <%= booking.activity.user.name %> | <%= booking.activity.name %> </p>
     <% end %>
+    <% else %>
+    <p>No upcoming bookings.</p>
+    <% end %>
+
+
+    <% if @hosted_rentals.present? %>
+    <% @hosted_rentals.each do |rental| %>
+    <p><%= rental.booking_date %> | <%= rental.user.name %> | <%= rental.activity.name %> </p>
+      <% end %>
     <% else %>
     <p>No upcoming rentals.</p>
     <% end %>
+
 
 
 
