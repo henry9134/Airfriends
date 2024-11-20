@@ -5,7 +5,7 @@
     </div>
 
     <div class ='user-details'>
-      <h2>My name : <%= @user.name %> <i class="pen fa-solid fa-pen-to-square"></i></h2>
+      <h2>Name : <%= @user.name %> <i class="pen fa-solid fa-pen-to-square"></i></h2>
       <h2>Age : <%= @user.age %> <i class="pen fa-solid fa-pen-to-square"></i></h2>
       <h2>Gender : <%= @user.gender %> <i class="pen fa-solid fa-pen-to-square"></i></h2>
       <h2>Location : <%= @user.location %> <i class="pen fa-solid fa-pen-to-square"></i></h2>
@@ -13,43 +13,71 @@
     </div>
   </div>
 
+  <div class='row'>
+    <div class='col-md-4'>
+      <h2 class='pending-activities mt-4'>PENDING RENTALS</h2>
+      <div class='pending-activities'>
+        <% if @pending_requests.present? %>
+          <% @pending_requests.each do |request| %>
+            <div class='activity-card-pending' style="border: 1px solid #ccc; border-radius: 8px; padding: 10px; margin-bottom: 10px;">
+              <p> Date : <%= request.booking_date %> </p>
 
-  <h2 class='pending-activities mt-4'>PENDING ACTIVITIES</h2>
-  <% @pending_requests.each do |request| %>
-   <p><%= request.booking_date %> |<%= request.user.name %> | <%= request.activity.name %> </p>
-
-   <%= simple_form_for request do |f| %>
-   <%= f.input :status, as: :hidden, input_html: {value: 'accepted'} %>
-   <%= f.submit 'Accept', class: "btn btn-primary"  %>
-   <% end %>
-
-   <%= simple_form_for request do |f| %>
-   <%= f.input :status, as: :hidden, input_html: {value: 'declined'} %>
-   <%= f.submit 'Decline', class: "btn btn-danger"  %>
-   <% end %>
-   <% end %>
-
-  <div class ='links'>
-
-    <h2 class='upcoming-activities mt-4'>UPCOMING ACTIVITIES</h2>
-    <div class="upcoming-rentals">
-      <% if @hosted_rentals.present? %>
-        <% @hosted_rentals.each do |rental| %>
-          <p> Date : <%= rental.booking_date %> </p>
-          <p> <strong><%= rental.user.name %> </strong> | <%= rental.activity.name %> </p>
+              <div class='pending-actions d-flex justify-content-between'>
+                <p> <strong><%= request.user.name %></strong> | <%= request.activity.name %></p>
+                <div class="d-flex align-items-center justify-content-end mb-0" role="group" aria-label="Pending Actions">
+                  <%= simple_form_for request do |f| %>
+                    <%= f.input :status, as: :hidden, input_html: {value: 'accepted'} %>
+                    <%= f.submit 'Accept', class: "btn btn-success" %>
+                  <% end %>
+                  <%= simple_form_for request do |f| %>
+                    <%= f.input :status, as: :hidden, input_html: {value: 'declined'} %>
+                    <%= f.submit 'Decline', class: "btn btn-danger" %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          <p>No pending requests.</p>
         <% end %>
-      <% else %>
-        <p>No upcoming rentals.</p>
-      <% end %>
+      </div>
     </div>
 
-    <h2 class='confirmed-rentals mt-5'>CONFIRMED RENTALS</h2>
-    <% if @confirmed_requests.present?%>
-    <% @confirmed_requests.each do |booking| %>
-    <p><%= booking.booking_date %> | <%= booking.activity.user.name %> | <%= booking.activity.name %> </p>
-    <% end %>
-    <% else %>
-    <p>No upcoming bookings.</p>
-    <% end %>
+
+    <div class='col-md-4'>
+      <div class='rentals'>
+        <h2 class='confirmed-rentals mt-4'>UPCOMING ACTIVITIES</h2>
+        <div class="upcoming-rentals">
+          <% if @confirmed_requests.present? %>
+            <% @confirmed_requests.each do |booking| %>
+              <div class='activity-card' style="border: 1px solid #ccc; border-radius: 8px; padding: 10px; margin-bottom: 10px;">
+                <p> Date : <%= booking.booking_date %> </p>
+                <p> <strong><%= booking.activity.user.name %> </strong> | <%= booking.activity.name %> </p>
+              </div>
+            <% end %>
+          <% else %>
+            <p>No upcoming bookings.</p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class='col-md-4'>
+      <div class='activities'>
+        <h2 class='upcoming-activities mt-4'>CONFIRMED RENTALS</h2>
+        <div class="upcoming-rentals">
+          <% if @hosted_rentals.present? %>
+            <% @hosted_rentals.each do |rental| %>
+              <div class='activity-card' style="border: 1px solid #ccc; border-radius: 8px; padding: 10px; margin-bottom: 10px;">
+                <p> Date : <%= rental.booking_date %> </p>
+                <p> <%= rental.activity.name %> with <strong><%= rental.user.name %> </strong> </p>
+              </div>
+            <% end %>
+          <% else %>
+            <p>No upcoming rentals.</p>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
