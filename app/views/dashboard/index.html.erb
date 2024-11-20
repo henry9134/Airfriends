@@ -1,19 +1,22 @@
-<div class ='dashboard_page'>
+<div class ='dashboard_page mb-5'>
   <div class ='User-info'>
     <div class ='profile picture'>
   <%= cl_image_tag @user.photo.key, style: "width: 280px; height: 280px; object-fit: cover; border-radius: 24px; margin: 10px 10px 0 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);" %>
     </div>
 
     <div class ='user-details'>
-      <h2> <%= @user.name %> | <%= @user.age %> | <%= @user.gender %></h2>
-      <h2> <%= @user.description%> <%= @user.location %>
+      <h2>My name : <%= @user.name %> <i class="pen fa-solid fa-pen-to-square"></i></h2>
+      <h2>Age : <%= @user.age %> <i class="pen fa-solid fa-pen-to-square"></i></h2>
+      <h2>Gender : <%= @user.gender %> <i class="pen fa-solid fa-pen-to-square"></i></h2>
+      <h2>Location : <%= @user.location %> <i class="pen fa-solid fa-pen-to-square"></i></h2>
+      <h2>About me : <%= @user.description %> <i class="pen fa-solid fa-pen-to-square"></i></h2>
     </div>
   </div>
 
 
-  <h2>PENDING REQUESTS</h2>
+  <h2 class='pending-activities mt-4'>PENDING ACTIVITIES</h2>
   <% @pending_requests.each do |request| %>
-   <p><%= request.booking_date %> | <%= request.user.name %> | <%= request.activity.name %> </p>
+   <p><%= request.booking_date %> |<%= request.user.name %> | <%= request.activity.name %> </p>
 
    <%= simple_form_for request do |f| %>
    <%= f.input :status, as: :hidden, input_html: {value: 'accepted'} %>
@@ -26,24 +29,27 @@
    <% end %>
    <% end %>
 
-
   <div class ='links'>
-    <h2>CONFIRMED ACTIVITIES</h2>
+
+    <h2 class='upcoming-activities mt-4'>UPCOMING ACTIVITIES</h2>
+    <div class="upcoming-rentals">
+      <% if @hosted_rentals.present? %>
+        <% @hosted_rentals.each do |rental| %>
+          <p> Date : <%= rental.booking_date %> </p>
+          <p> <strong><%= rental.user.name %> </strong> | <%= rental.activity.name %> </p>
+        <% end %>
+      <% else %>
+        <p>No upcoming rentals.</p>
+      <% end %>
+    </div>
+
+    <h2 class='confirmed-rentals mt-5'>CONFIRMED RENTALS</h2>
     <% if @confirmed_requests.present?%>
     <% @confirmed_requests.each do |booking| %>
     <p><%= booking.booking_date %> | <%= booking.activity.user.name %> | <%= booking.activity.name %> </p>
     <% end %>
     <% else %>
     <p>No upcoming bookings.</p>
-    <% end %>
-
-    <h2>UPCOMING RENTALS</h2>
-    <% if @hosted_rentals.present? %>
-    <% @hosted_rentals.each do |rental| %>
-    <p><%= rental.booking_date %> | <%= rental.user.name %> | <%= rental.activity.name %> </p>
-      <% end %>
-    <% else %>
-    <p>No upcoming rentals.</p>
     <% end %>
   </div>
 </div>

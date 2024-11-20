@@ -1,0 +1,62 @@
+
+.dashboard_page {
+  padding: 20px;
+}
+
+.User-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profile.picture {
+  margin-right: 20px;
+}
+
+.user-details h2 {
+  font-size: 1.5rem;
+  color: #343a40; // Darker text for better readability
+}
+
+.links {
+  margin-top: 30px;
+}
+
+.links h2 {
+  font-size: 1.5rem;
+  color: #dc3545; // Primary color for headings
+  margin-bottom: 10px;
+}
+
+.btn {
+  margin-right: 10px; // Space between buttons
+}
+
+.btn-primary {
+  background-color: #007bff; // Bootstrap primary color
+  border-color: #007bff;
+}
+
+.btn-danger {
+  background-color: #dc3545; // Bootstrap danger color
+  border-color: #dc3545;
+}
+
+p {
+  font-size: 1rem;
+  color: #495057; // Darker text for paragraphs
+  margin: 5px 0;
+}
+
+.pen {
+  color: #dc3545;
+  font-size: 0.8rem;
+  margin-left: 10px;
+}
+
+.links {
+  margin-bottom: 50px;
+}
+.upcoming-rentals {
+  margin-top: 20px;
+}

@@ -12,12 +12,22 @@
   background-color: #f9f9f9;
 }
 
-.profile-picture img {
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-info .profile-picture {
   width: 250px;
   height: 250px;
   border-radius: 0;
   object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 5px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
+
 
 .user-info h2 {
   margin: 0;
@@ -28,4 +38,26 @@
 .user-info p {
   margin: 5px 0;
   color: #555;
+}
+
+.rental-form-container {
+  margin: 10px 20px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.submit-rental {
+  margin: 5px 55px;
+}
+
+.user-activities {
+  justify-content: center;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  max-width: 600px;
 }
