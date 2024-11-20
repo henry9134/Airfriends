@@ -1,25 +1,21 @@
 <div class ='user-details'>
-  <div class ='profile-picture'>
-    <%= image_tag @user.image_url, class: "avatar"%>
-  </div>
-
   <div class ='user-info'>
+    <%= cl_image_tag @user.photo.key, class: "profile-picture" %>
     <h2> <%= @user.name %> | <%= @user.age %> | <%= @user.gender %></h2>
-      <p>Location: <%= @user.location %></p>
-      <p>Description: <%= @user.description%></p>
+    <p>Location: <%= @user.location %></p>
+    <p>Description: <%= @user.description%></p>
   </div>
 
+</div>
+<div class='new-rental'>
   <h1>New Rental</h1>
 
-<%= simple_form_for @rental do |f| %>
-
-  <%= f.input :booking_date, label: "Booking Date", as: :date, html5: true %>
-
-  <%= f.association :activity,
-              collection: @user.activities,
-              label: "Choose an Activity",
-              prompt: "Select an activity" %>
-
-  <%= f.submit "Submit Rental", class: "btn btn-primary" %>
-<% end %>
+  <%= simple_form_for @rental do |f| %>
+    <%= f.input :booking_date, label: "Booking Date", as: :date, html5: true %>
+    <%= f.association :activity,
+      collection: @user.activities,
+      label: "Choose an Activity",
+      prompt: "Select an activity" %>
+    <%= f.submit "Submit Rental", class: "btn btn-primary" %>
+  <% end %>
 </div>
