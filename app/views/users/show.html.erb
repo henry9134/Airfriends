@@ -1,6 +1,6 @@
 <div class ='user-details'>
   <div class ='profile-picture'>
-    <%= image_tag @user.image_url, class: "avatar"%>
+    <%= cl_image_tag @user.photo.key, style: "width: 280px; height: 280px; object-fit: cover; border-radius: 24px; margin: 10px 10px 0 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);" %>
   </div>
 
   <div class ='user-info'>
