@@ -10,9 +10,27 @@
     </div>
   </div>
 
+
+  <h2>PENDING REQUESTS</h2>
+  <% @pending_requests.each do |request| %>
+   <p><%= request.booking_date %> | <%= request.user.name %> | <%= request.activity.name %> </p>
+
+   <%= simple_form_for request do |f| %>
+   <%= f.input :status, as: :hidden, input_html: {value: 'accepted'} %>
+   <%= f.submit 'Accept', class: "btn btn-primary"  %>
+   <% end %>
+
+   <%= simple_form_for request do |f| %>
+   <%= f.input :status, as: :hidden, input_html: {value: 'declined'} %>
+   <%= f.submit 'Decline', class: "btn btn-danger"  %>
+   <% end %>
+   <% end %>
+
+
   <div class ='links'>
-    <% if @upcoming_bookings.present?%>
-    <% @upcoming_bookings.each do |booking| %>
+    <h2>CONFIRMED ACTIVITIES</h2>
+    <% if @confirmed_requests.present?%>
+    <% @confirmed_requests.each do |booking| %>
     <p><%= booking.booking_date %> | <%= booking.activity.user.name %> | <%= booking.activity.name %> </p>
     <% end %>
     <% else %>
@@ -20,6 +38,8 @@
     <% end %>
 
 
+
+    <h2>UPCOMING RENTALS</h2>
     <% if @hosted_rentals.present? %>
     <% @hosted_rentals.each do |rental| %>
     <p><%= rental.booking_date %> | <%= rental.user.name %> | <%= rental.activity.name %> </p>

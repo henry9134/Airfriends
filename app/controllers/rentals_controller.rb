@@ -15,10 +15,21 @@ class RentalsController < ApplicationController
 
   end
 
+  def update
+    @request_to_confirm = Rental.find(params[:id])
+
+    if @request_to_confirm.update(rental_params)
+    redirect_to dashboard_path
+    else
+    render 'new', status: :unprocessable_entity
+    end
+  end
+
   private
 
   def rental_params
     params.require(:rental).permit(:booking_date, :activity_id, :status, :user_id)
   end
 
-end
+
+  end
