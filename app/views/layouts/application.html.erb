@@ -12,37 +12,46 @@
 
   <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);">
-    <div class="container mb-1 mt-1">
-        <a class="navbar-brand ms-3" href="/index">AirFriends</a>
-        <button
-            data-mdb-collapse-init
-            class="navbar-toggler"
-            type="button"
-            data-mdb-target="#navbarButtonsExample"
-            aria-controls="navbarButtonsExample"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-        >
-            <i class="fas fa-bars"></i>
-        </button>
+  <div class="container mb-1 mt-1">
+    <a class="navbar-brand ms-3" href="/">AirFriends</a>
+    <button
+      data-mdb-collapse-init
+      class="navbar-toggler"
+      type="button"
+      data-mdb-target="#navbarButtonsExample"
+      aria-controls="navbarButtonsExample"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
 
-        <div class="collapse navbar-collapse" id="navbarButtonsExample">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Dashboard</a>
-                </li>
-            </ul>
-
-            <div class="d-flex align-items-center">
-                <button data-mdb-ripple-init type="button" class="btn btn-outline-danger px-3 me-2">
-                    Login
-                </button>
-                <button data-mdb-ripple-init type="button" class="btn btn-danger me-3">
-                    Sign up for free
-                </button>
+    <div class="collapse navbar-collapse" id="navbarButtonsExample">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      </ul>
+      <% if user_signed_in? %>
+        <div class="d-flex align-items-center">
+          <ul class="nav-item me-3">
+            <a class="nav-link text-light" href="/dashboard">Dashboard</a>
+          </ul>
+          <ul class="nav-item dropdown">
+            <%= cl_image_tag current_user.photo.key, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, aria: { haspopup: true, expanded: false }, style: "border-radius: 50%; width: 40px; height: 40px; object-fit: cover;" %>
+            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">My profile</a>
+              <a class="dropdown-item" href="#">My bookings</a>
+              <div class="dropdown-divider"></div>
+              <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item text-danger" %>
             </div>
+          </ul>
         </div>
+      <% else %>
+        <%= link_to "Login", new_user_session_path, class: "btn btn-outline-danger me-3" %>
+        <button data-mdb-ripple-init type="button" class="btn btn-danger me-3">
+          Sign up for free
+        </button>
+      <% end %>
     </div>
+  </div>
 </nav>
     <%= yield %>
     <%= render "shared/flashes" %>

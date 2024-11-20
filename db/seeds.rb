@@ -1,3 +1,5 @@
+require 'open-uri'
+
 Rental.destroy_all
 Activity.destroy_all
 User.destroy_all
@@ -19,20 +21,35 @@ users = [
     ]
   },
   {
-    name: "Will Vanderwyden",
-    email: "will@example.com",
+    name: "Travis Scott",
+    email: "travis@example.com",
     password: "password123",
-    description: "Phatest arrow in Le Wagon, aspiring dodgeball god.",
-    location: "Shinjuku",
-    age: 18,
+    description: "Award-winning rapper and producer known for his innovative sound and energetic performances.",
+    location: "Roppongi",
+    age: 31,
     gender: "Male",
-    image_url: "https://d26jy9fbi4q9wx.cloudfront.net/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBNUNNQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--b1853a1231b8914d08d5cffc2d87feab281d69d3/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2RTNKbGMybDZaVjkwYjE5bWFXeHNXd2hwQWNocEFjaDdCam9KWTNKdmNEb09ZWFIwWlc1MGFXOXUiLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--b67d9ded4d28d0969fbb98b4c21b79257705a99a/great%20me.jpg",
+    image_url: "https://media.npr.org/assets/img/2021/11/16/gettyimages-1235223332_sq-e88ad790d447bd7dfcb0c1571047db26d39a8ee0.jpg?s=1100&c=85&f=jpeg",
     activities: [
-      { name: "Dodgeball masterclass", price: 10000, description: "Learn dodgeball from Will Vanderwyden." },
-      { name: "Squeeky chair workshop", price: 5000, description: "Learn how to use a squeeky chair from Will Vanderwyden." },
-      { name: "Private dance lesson", price: 12000, description: "Get access to a private dance lesson with Will Vanderwyden." }
+      { name: "Astroworld Festival Experience", price: 300, description: "Join Travis Scott at his annual music festival." },
+      { name: "Recording Session", price: 1000, description: "Get a behind-the-scenes look at a recording session with Travis." },
+      { name: "Merchandise Design Workshop", price: 200, description: "Learn about merchandise design inspired by Travis's brand." }
     ]
   },
+  # {
+  #   name: "Will Vanderwyden",
+  #   email: "will@example.com",
+  #   password: "password123",
+  #   description: "Phatest arrow in Le Wagon, aspiring dodgeball god.",
+  #   location: "Shinjuku",
+  #   age: 18,
+  #   gender: "Male",
+  #   image_url: "https://d26jy9fbi4q9wx.cloudfront.net/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBNUNNQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--b1853a1231b8914d08d5cffc2d87feab281d69d3/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2RTNKbGMybDZaVjkwYjE5bWFXeHNXd2hwQWNocEFjaDdCam9KWTNKdmNEb09ZWFIwWlc1MGFXOXUiLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--b67d9ded4d28d0969fbb98b4c21b79257705a99a/great%20me.jpg",
+  #   activities: [
+  #     { name: "Dodgeball masterclass", price: 10000, description: "Learn dodgeball from Will Vanderwyden." },
+  #     { name: "Squeeky chair workshop", price: 5000, description: "Learn how to use a squeeky chair from Will Vanderwyden." },
+  #     { name: "Private dance lesson", price: 12000, description: "Get access to a private dance lesson with Will Vanderwyden." }
+  #   ]
+  # },
   {
     name: "Dwayne Johnson",
     email: "dwayne@example.com",
@@ -81,7 +98,7 @@ users = [
   {
     name: "Beyoncé",
     email: "beyonce@example.com",
-    password: "password123",
+    password: " ",
     description: "Global music icon and philanthropist known for her powerful voice and performances.",
     location: "Shibuya",
     age: 42,
@@ -134,18 +151,18 @@ users = [
     ]
   },
   {
-    name: "Emma Watson",
-    email: "emma@example.com",
+    name: "Corinna Kopf",
+    email: "corinna@example.com",
     password: "password123",
-    description: "Actress and activist known for her role in the Harry Potter series and women's rights advocacy.",
-    location: "Shinjuku",
-    age: 33,
+    description: "Social media influencer and content creator known for her engaging personality and lifestyle content.",
+    location: "Meguro",
+    age: 27,
     gender: "Female",
-    image_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG4nPytfUbqvxK2cMXdWhgixXw487p_nXLZA&s",
+    image_url: "https://thespun.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cq_auto:good%2Cw_1200/MjEwMjE2MTc5MjEyNDk0MDI4/screenshot-2024-10-24-at-41422-pm.png",
     activities: [
-      { name: "Acting for Activism Workshop", price: 100, description: "Learn how to use acting for social change with Emma Watson." },
-      { name: "Sustainable Fashion Seminar", price: 200, description: "Explore sustainable fashion practices." },
-      { name: "Women's Rights Advocacy Training", price: 150, description: "Engage in training focused on women's rights advocacy." }
+      { name: "Content Creation Workshop", price: 150, description: "Learn the art of content creation with Corinna Kopf." },
+      { name: "Social Media Strategy Seminar", price: 200, description: "Explore effective social media strategies." },
+      { name: "Influencer Marketing Workshop", price: 250, description: "Understand the dynamics of influencer marketing." }
     ]
   },
   {
@@ -181,12 +198,17 @@ users = [
 ]
 
 users.each do |user_hash|
-  user = User.create(user_hash.except(:activities))
+  user = User.new(user_hash.except(:activities))
+  image = user_hash[:image_url]
+  p image
+  file = URI.open(image)
+  user.photo.attach(io: file, filename: "#{user.name}.jpg")
   user_hash[:activities].each do |activity_hash|
     activity = Activity.new(activity_hash)
     activity.user = user
     activity.save
   end
+  user.save
 end
 
 User.all.each do |user|
