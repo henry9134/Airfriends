@@ -98,7 +98,7 @@ users = [
   {
     name: "Beyoncé",
     email: "beyonce@example.com",
-    password: " ",
+    password: "password123",
     description: "Global music icon and philanthropist known for her powerful voice and performances.",
     location: "Shibuya",
     age: 42,
