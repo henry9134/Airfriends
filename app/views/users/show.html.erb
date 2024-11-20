@@ -5,17 +5,17 @@
     <p>Location: <%= @user.location %></p>
     <p>Description: <%= @user.description%></p>
   </div>
-
 </div>
-<div class='new-rental'>
-  <h1>New Rental</h1>
-
-  <%= simple_form_for @rental do |f| %>
-    <%= f.input :booking_date, label: "Booking Date", as: :date, html5: true %>
-    <%= f.association :activity,
-      collection: @user.activities,
-      label: "Choose an Activity",
-      prompt: "Select an activity" %>
-    <%= f.submit "Submit Rental", class: "btn btn-primary" %>
-  <% end %>
+<div class='row'>
+  <div class='col-2 rental-form'>
+    <h2>New Rental</h2>
+    <%= simple_form_for @rental do |f| %>
+      <%= f.input :booking_date, label: "Booking Date", as: :date, html5: true %>
+      <%= f.association :activity,
+        collection: @user.activities,
+        label: "Choose an Activity",
+        prompt: "Select an activity" %>
+      <%= f.submit "Submit Rental", class: "btn btn-primary" %>
+    <% end %>
+  </div>
 </div>

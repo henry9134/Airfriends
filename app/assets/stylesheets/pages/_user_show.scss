@@ -11,6 +11,7 @@
   border-radius: 8px;
   background-color: #f9f9f9;
 }
+
 .user-info {
   display: flex;
   flex-direction: column;
@@ -24,6 +25,7 @@
   object-fit: cover;
   border-radius: 50%;
   margin-bottom: 5px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 
@@ -38,7 +40,7 @@
   color: #555;
 }
 
-.new-rental {
+.rental-form {
   display: flex;
   flex-direction: column;
   align-items: left;
