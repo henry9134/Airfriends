@@ -1,25 +1,35 @@
 <div class ='user-details'>
-  <div class ='profile-picture'>
-    <%= cl_image_tag @user.photo.key, style: "width: 280px; height: 280px; object-fit: cover; border-radius: 24px; margin: 10px 10px 0 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);" %>
-  </div>
-
   <div class ='user-info'>
+    <%= cl_image_tag @user.photo.key, class: "profile-picture mb-3" %>
     <h2> <%= @user.name %> | <%= @user.age %> | <%= @user.gender %></h2>
-      <p>Location: <%= @user.location %></p>
-      <p>Description: <%= @user.description%></p>
+    <p><i class="fa-solid fa-location-dot"></i> Location : <%= @user.location %></p>
+    <p><i class="fa-solid fa-user"></i> About <strong><%= @user.name %></strong> :</p>
+    <p><%= @user.description %></p>
   </div>
+</div>
+<div class='row justify-content-center'>
+  <div class='col-12 d-flex flex-column align-items-center'>
+    <div class='user-activities text-center'>
+      <h3>Activities</h3>
+      <div class="activity-list">
+        <% @user.activities.each do |activity| %>
+          <div class="activity-item">
+            <strong><%= activity.name %></strong> - <%= number_to_currency(activity.price) %>
+          </div>
+        <% end %>
+      </div>
+    </div>
 
-  <h1>New Rental</h1>
-
-<%= simple_form_for @rental do |f| %>
-
-  <%= f.input :booking_date, label: "Booking Date", as: :date, html5: true %>
-
-  <%= f.association :activity,
-              collection: @user.activities,
-              label: "Choose an Activity",
-              prompt: "Select an activity" %>
-
-  <%= f.submit "Submit Rental", class: "btn btn-primary" %>
-<% end %>
+    <div class='rental-form-container me-3 mt-3 mb-5'>
+      <h2>New Rental</h2>
+      <%= simple_form_for @rental do |f| %>
+        <%= f.input :booking_date, label: "Booking Date", as: :date, html5: true %>
+        <%= f.association :activity,
+          collection: @user.activities,
+          label: "Choose an Activity",
+          prompt: "Select an activity" %>
+        <%= f.submit "Submit Rental", class: "submit-rental btn btn-danger" %>
+      <% end %>
+    </div>
+  </div>
 </div>
