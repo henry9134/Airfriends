@@ -1,13 +1,5 @@
 class RentalsController < ApplicationController
 
-  def index
-    @rental = Rental.all
-  end
-
-  def New
-    @user = User.find(params[:id])
-    @rental = Rental.new
-  end
 
   def create
     @user = current_user
@@ -15,16 +7,18 @@ class RentalsController < ApplicationController
     @rental.user = @user
 
     if @rental.save
-      redirect_to @rental, notice: 'Rental successfully created.'
+      redirect_to dashboard_path, notice: 'Rental successfully created.'
     else
+      raise
       render :new
     end
+
   end
 
   private
 
   def rental_params
-    params.require(:rental).permit(:booking_date, :activity_id, :status)
+    params.require(:rental).permit(:date, :activity_id, :status, :user_id)
   end
 
 end
