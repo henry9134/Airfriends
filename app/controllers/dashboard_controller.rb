@@ -2,11 +2,13 @@ class DashboardController < ApplicationController
   def index
     # @upcoming_bookings = Booking.where()
     @user = current_user
-    @upcoming_bookings = @user.rentals.where("booking_date >= ?", Date.today)
-    @confirmed_requests = @upcoming_bookings.where(status: "accepted")
-    @hosted_rentals = Rental.joins(:activity).where(activities: {user_id: @user.id}).where("booking_date >= ?", Date.today)
+
+    @accepted_rentals = @user.rentals.where(status: "accepted")
+    @pending_rentals = @user.rentals.where(status: "pending")
+    @declined_rentals = @user.rentals.where(status: "declined")
+
+    @confirmed_requests = Rental.joins(:activity).where(activities: {user_id: @user.id}).where("booking_date >= ?", Date.today).where(status: "accepted")
     @pending_requests = @user.requests.where(status: "pending")
   end
   # @upcoming_bookings.where(status: "pending").where.not(id: @user)
-
 end
