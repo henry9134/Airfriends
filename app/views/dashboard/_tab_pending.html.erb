@@ -1,0 +1,11 @@
+ 
+<div class='col-md-4'>
+  <h2 class='pending-activities mt-4'>PENDING REQUESTS</h2>
+  <div class='pending-activities'>
+    <% if @pending_requests.present? %>
+      <%= render 'pending_requests' %>
+    <% else %>
+      <p>No pending requests.</p>
+    <% end %>
+  </div>
+</div>

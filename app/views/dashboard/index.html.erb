@@ -4,154 +4,29 @@
       <%= cl_image_tag @user.photo.key, style: "width: 280px; height: 280px; object-fit: cover; border-radius: 24px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); margin-left: 10px;" %>
     </div>
     <div class ='user-details'>
-      <h2>Name : <%= @user.name %> <i class="pen fa-solid fa-pen-to-square"></i></h2>
-      <h2>Age : <%= @user.age %> <i class="pen fa-solid fa-pen-to-square"></i></h2>
-      <h2>Gender : <%= @user.gender %> <i class="pen fa-solid fa-pen-to-square"></i></h2>
-      <h2>Location : <%= @user.location %> <i class="pen fa-solid fa-pen-to-square"></i></h2>
-      <h2>About me : <%= @user.description %> <i class="pen fa-solid fa-pen-to-square"></i></h2>
+      <%= render 'user_details' %>
     </div>
   </div>
-  <div class='row'>
-    <div class='col-md-4'>
-      <h2 class='pending-activities mt-4'>PENDING REQUESTS</h2>
-      <div class='pending-activities'>
-        <% if @pending_requests.present? %>
-          <% @pending_requests.each do |request| %>
-            <div class='activity-card-pending' style="border: 1px solid #ccc; border-radius: 8px; padding: 10px; margin-bottom: 10px;">
-              <div class='pending-actions d-flex justify-content-between align-items-center'>
-                <div>
-                  <p class="mb-0">Date: <%= request.booking_date %></p>
-                  <p class="mb-0"><strong><%= request.user.name %></strong> | <%= request.activity.name %></p>
-                </div>
-                <div class="d-flex align-items-center justify-content-end" role="group" aria-label="Pending Actions">
-                  <%= simple_form_for request do |f| %>
-                    <%= f.input :status, as: :hidden, input_html: {value: 'accepted'} %>
-                    <%= f.submit 'Accept', class: "btn btn-accept me-2" %>
-                  <% end %>
-                  <%= simple_form_for request do |f| %>
-                    <%= f.input :status, as: :hidden, input_html: {value: 'declined'} %>
-                    <%= f.submit 'Decline', class: "btn btn-danger" %>
-                  <% end %>
-                </div>
-              </div>
-            </div>
-          <% end %>
-        <% else %>
-          <p>No pending requests.</p>
-        <% end %>
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Requests</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Rentals</button>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+      <div class='row'>
+        <%= render 'tab_pending' %>
+        <%= render 'tab_confirmed_requests' %>
       </div>
     </div>
-    <div class='col-md-4'>
-      <div class='rentals'>
-        <h2 class='confirmed-rentals mt-4'>UPCOMING RENTALS</h2>
-        <div class="upcoming-rentals">
-          <% if @accepted_rentals.any? || @pending_rentals.any? || @declined_rentals.any? %>
-            <% @accepted_rentals.each do |rental| %>
-              <div class='rental-card-accepted' style="border: 1px solid #ccc; border-radius: 8px; padding: 10px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
-                <p>Date: <%= rental.booking_date %></p>
-                <p><strong><%= rental.activity.user.name %></strong> | <%= rental.activity.name %></p>
-                <% if rental.booking_date < Date.today %>
-                  <%= link_to 'Add Review', '#', class: 'btn btn-success mt-2', data: { bs_toggle: 'modal', bs_target: "reviewModal#{rental.id}" } %>
-                  <div class="modal fade" id="reviewModal<%= rental.id %>" tabindex="-1" aria-labelledby="reviewModalLabel<%= rental.id %>" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="reviewModalLabel<%= rental.id %>">Add a review <i class="star fa-solid fa-star"></i></h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                          <%= form_with(url: root_path  , local: true) do |form| %>
-                            <div class="mb-3">
-                              <%= form.label :rating, 'Rating' %>
-                              <%= form.select :rating, (1..5).to_a, {}, class: 'form-select' %>
-                            </div>
-                            <div class="mb-3">
-                              <%= form.label :comment, 'Comment' %>
-                              <%= form.text_area :comment, class: 'form-control', rows: 3 %>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                          <%= form.submit 'Submit Review', class: 'btn btn-primary' %>
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        </div>
-                          <% end %>
-                      </div>
-                    </div>
-                  </div>
-                <% else %>
-                  <p class="status-symbol-accepted me-2"><%= rental.status.upcase %></p>
-                <% end %>
-              </div>
-            <% end %>
-            <% @pending_rentals.each do |rental| %>
-              <div class='rental-card-pending' style="border: 1px solid #ccc; border-radius: 8px; padding: 10px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
-                <p>Date: <%= rental.booking_date %></p>
-                <p><strong><%= rental.activity.user.name %></strong> | <%= rental.activity.name %></p>
-                <p class="status-symbol-pending me-2"><%= rental.status.upcase %></p>
-              </div>
-            <% end %>
-            <% @declined_rentals.each do |rental| %>
-              <div class='rental-card-declined' style="border: 1px solid #ccc; border-radius: 8px; padding: 10px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
-                <p>Date: <%= rental.booking_date %></p>
-                <p><strong><%= rental.activity.user.name %></strong> | <%= rental.activity.name %></p>
-                <p class="status-symbol-declined me-2"><%= rental.status.upcase %></p>
-              </div>
-            <% end %>
-          <% else %>
-            <p>No upcoming bookings.</p>
-          <% end %>
-        </div>
-      </div>
-    </div>
-    <div class='col-md-4'>
-      <div class='activities'>
-        <h2 class='upcoming-activities mt-4'>CONFIRMED REQUESTS</h2>
-        <div class="upcoming-rentals">
-          <% if @confirmed_requests.present? %>
-            <% @confirmed_requests.each do |request| %>
-              <div class='activity-card' style="border: 1px solid #ccc; border-radius: 8px; padding: 10px; margin-bottom: 10px;">
-                <p> Date : <%= request.booking_date %> </p>
-                <p> <%= request.activity.name %> with <strong><%= request.user.name %> </strong> </p>
-                <% if request.booking_date < Date.today %>
-                  <%= link_to 'Add Review', '#', class: 'btn btn-info mt-2', data: { bs_toggle: 'modal', bs_target: '#reviewModal' } %>
-                  <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <div>
-                            <h5 class="modal-title" id="reviewModalLabel">Add a review <i class="star fa-solid fa-star"></i></h5>
-                            <p>How was your experience with <strong><%= request.user.name %></strong></p>
-                          </div>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                          <%= form_with(url: root_path, local: true) do |form| %>
-                            <div class="mb-3">
-                              <%= form.label :rating, 'Rating' %>
-                              <%= form.select :rating, (1..5).to_a, {}, class: 'form-select' %>
-                            </div>
-                            <div class="mb-3">
-                              <%= form.label :comment, 'Comment' %>
-                              <%= form.text_area :comment, class: 'form-control', rows: 3 %>
-                            </div>
-                          </div>
-                          <div class="modal-footer">
-                            <%= form.submit 'Submit Review', class: 'btn btn-primary' %>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          </div>
-                        <% end %>
-                      </div>
-                    </div>
-                  </div>
-                <% end %>
-              </div>
-            <% end %>
-          <% else %>
-            <p>No upcoming requests.</p>
-          <% end %>
-        </div>
+    <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+      <div class='row'>
+        <%= render 'tab_upcoming_rentals' %>
+        <%= render 'tab_past_rentals' %>
       </div>
     </div>
   </div>
-</div>
 </div>

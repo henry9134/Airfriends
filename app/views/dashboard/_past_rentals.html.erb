@@ -1,0 +1,37 @@
+<% @accepted_rentals.each do |rental| %>
+  <% if rental.booking_date < Date.today %>
+    <div class='rental-card-accepted' style="border: 1px solid #ccc; border-radius: 8px; padding: 10px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
+      <div style="display: flex; flex-direction: column; align-items: flex-start;">
+        <p>Date: <%= rental.booking_date %></p>
+        <p><strong><%= rental.activity.user.name %></strong> | <%= rental.activity.name %></p>
+      </div>
+      <%= link_to 'Add Review', '#', class: 'btn btn-success mt-2', data: { bs_toggle: 'modal', bs_target: "reviewModal#{rental.id}" } %>
+      <div class="modal fade" id="reviewModal<%= rental.id %>" tabindex="-1" aria-labelledby="reviewModalLabel<%= rental.id %>" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="reviewModalLabel<%= rental.id %>">Add a review <i class="star fa-solid fa-star"></i></h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <%= form_with(url: root_path, local: true) do |form| %>
+                <div class="mb-3">
+                  <%= form.label :rating, 'Rating' %>
+                  <%= form.select :rating, (1..5).to_a, {}, class: 'form-select' %>
+                </div>
+                <div class="mb-3">
+                  <%= form.label :comment, 'Comment' %>
+                  <%= form.text_area :comment, class: 'form-control', rows: 3 %>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <%= form.submit 'Submit Review', class: 'btn btn-primary' %>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
