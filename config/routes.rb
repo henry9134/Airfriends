@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
+  get 'reviews/new'
   devise_for :users
 
-  resources :rentals, only: [:create, :update]
-  resources :users, only: [:index, :show]
+  resources :rentals, only: [:create, :update ]
+  resources :users, only: [:index, :show] do
+    resources :reviews, only: [:new, :create]
+  end
+  resources :reviews, only: [:destroy]
+  
   resources :activities, only: [:new,:create]
 
   root to: "pages#home"
