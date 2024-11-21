@@ -1,0 +1,12 @@
+<div class='col-md-4'>
+  <div class='activities'>
+    <h2 class='upcoming-activities mt-4'>PAST RENTALS</h2>
+    <div class="upcoming-rentals">
+      <% if @confirmed_requests.present? %>
+        <%= render 'past_rentals' %>
+      <% else %>
+        <p>No upcoming requests.</p>
+      <% end %>
+    </div>
+  </div>
+</div>

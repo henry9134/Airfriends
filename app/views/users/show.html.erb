@@ -19,7 +19,6 @@
         <% end %>
       </div>
     </div>
-
     <div class='rental-form-container me-3 mt-3 mb-5'>
       <h2>New Rental</h2>
       <%= simple_form_for @rental do |f| %>
@@ -31,20 +30,13 @@
         <%= f.submit "Submit Rental", class: "submit-rental btn btn-danger" %>
       <% end %>
     </div>
-
-    <%= link_to "Make a review", new_user_review_path(@user), class: "btn btn-primary"%>
-
     <div class="reviews_container">
       <p><strong>Reviews</strong></p>
       <% @user.reviews_as_friend.each do |review| %>
-      <div class="review">
-        <p><%= review.reviewer.name%>: <%= review.content %></p>
-        <p><%= review.rating %>/5</p>
-        <%= link_to "Delete",
-          review_path(review),
-          data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-        %>
-      </div>
+        <div class="review">
+          <p><%= review.reviewer.name%>: <%= review.content %></p>
+          <p><%= review.rating %>/5</p>
+        </div>
       <% end %>
     </div>
   </div>
