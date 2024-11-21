@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   resources :activities, only: [:new,:create]
 
   root to: "pages#home"
-  get "/dashboard", to: "users#dashboard", as: :dashboard
+  get "/dashboard", to: "dashboard#index", as: :dashboard
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
