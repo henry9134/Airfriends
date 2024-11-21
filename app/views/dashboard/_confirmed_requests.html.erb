@@ -1,0 +1,6 @@
+<% @confirmed_requests.each do |request| %>
+  <div class='activity-card rental-card-accepted' style="border: 1px solid #ccc; border-radius: 8px; padding: 10px; margin-bottom: 10px;">
+    <p>Date: <%= request.booking_date %></p>
+    <p><%= request.activity.name %> with <strong><%= request.user.name %></strong></p>
+  </div>
+<% end %>

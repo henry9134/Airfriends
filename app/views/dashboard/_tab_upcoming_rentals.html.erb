@@ -1,0 +1,14 @@
+<div class='col-md-4'>
+  <div class='rentals'>
+    <h2 class='confirmed-rentals mt-4'>UPCOMING RENTALS</h2>
+    <div class="upcoming-rentals">
+      <% if @accepted_rentals.any? || @pending_rentals.any? || @declined_rentals.any? %>
+        <%= render 'accepted_rentals' %>
+        <%= render 'pending_rentals' %>
+        <%= render 'declined_rentals' %>
+      <% else %>
+        <p>No upcoming bookings.</p>
+      <% end %>
+    </div>
+  </div>
+</div>

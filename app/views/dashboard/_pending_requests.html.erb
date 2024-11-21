@@ -1,0 +1,20 @@
+ <% @pending_requests.each do |request| %>
+  <div class='activity-card-pending' style="border: 1px solid #ccc; border-radius: 8px; padding: 10px; margin-bottom: 10px;">
+    <div class='pending-actions d-flex justify-content-between align-items-center'>
+      <div>
+        <p class="mb-0">Date: <%= request.booking_date %></p>
+        <p class="mb-0"><strong><%= request.user.name %></strong> | <%= request.activity.name %></p>
+      </div>
+      <div class="d-flex align-items-center justify-content-end" role="group" aria-label="Pending Actions">
+        <%= simple_form_for request do |f| %>
+          <%= f.input :status, as: :hidden, input_html: {value: 'accepted'} %>
+          <%= f.submit 'Accept', class: "btn btn-accept me-2" %>
+        <% end %>
+        <%= simple_form_for request do |f| %>
+          <%= f.input :status, as: :hidden, input_html: {value: 'declined'} %>
+          <%= f.submit 'Decline', class: "btn btn-danger" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

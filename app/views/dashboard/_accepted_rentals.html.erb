@@ -1,0 +1,11 @@
+<% @accepted_rentals.each do |rental| %>
+  <% if rental.booking_date >= Date.today %>
+    <div class='rental-card-accepted' style="border: 1px solid #ccc; border-radius: 8px; padding: 10px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
+      <div style="display: flex; flex-direction: column; align-items: flex-start;">
+        <p>Date: <%= rental.booking_date %></p>
+        <p><strong><%= rental.activity.user.name %></strong> | <%= rental.activity.name %></p>
+      </div>
+      <p class="status-symbol-accepted me-2"><%= rental.status.upcase %></p>
+    </div>
+  <% end %>
+<% end %>
