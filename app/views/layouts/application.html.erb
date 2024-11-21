@@ -15,16 +15,15 @@
 
   <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);">
-  <div class="container justify-content-center">
     <div class="d-flex align-items-center">
-      <%= link_to image_tag('logo.png', class: 'navbar-brand', alt: 'AirFriends Logo', size: "50x60", style: "filter: brightness(0) invert(1);"), '/', class: 'navbar-brand' %>
-      <%= link_to "AirFriends", root_path, class: "ms-2 text-white", style: "font-size: 1.5em; text-decoration: none; margin-left: 0;" %>
+      <%= link_to image_tag('logo.png', class: 'navbar-brand', alt: 'AirFriends Logo', size: "50x60", style: "filter: brightness(0) invert(1); margin-left: 50px;"), '/', class: 'navbar-brand' %>
+      <%= link_to "AirFriends", root_path, class: "text-white", style: "font-size: 1.5em; text-decoration: none; margin-left: -30px;" %>
     </div>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarButtonsExample" aria-controls="navbarButtonsExample" aria-expanded="false" aria-label="Toggle navigation">
       <i class="fas fa-bars"></i>
     </button>
 
-    <div class="collapse navbar-collapse justify-content-center" id="navbarButtonsExample">
+    <div class="collapse navbar-collapse" id="navbarButtonsExample">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
       </ul>
       <% if user_signed_in? %>
@@ -32,7 +31,7 @@
           <ul class="nav-item dropdown mt-3">
             <%= cl_image_tag current_user.photo.key, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, aria: { haspopup: true, expanded: false }, style: "border-radius: 50%; width: 40px; height: 40px; object-fit: cover; border: 2px solid #e0e0e0;" %>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="/dashboard" >My profile</a>
+              <a class="dropdown-item" href="/dashboard">My profile</a>
               <a class="dropdown-item" href="/dashboard">My bookings</a>
               <div class="dropdown-divider"></div>
               <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item text-danger" %>
@@ -41,13 +40,10 @@
         </div>
       <% else %>
         <%= link_to "Login", new_user_session_path, class: "btn btn-outline-danger me-3" %>
-        <button data-mdb-ripple-init type="button" class="btn btn-danger me-3">
-          Sign up for free
-        </button>
+        <%= link_to "Sign up for free", "/users/sign_up", class: "btn btn-danger me-5", data: { mdb_ripple_init: true } %>
       <% end %>
     </div>
-  </div>
-</nav>
+  </nav>
     <%= yield %>
     <%= render "shared/flashes" %>
   </body>
