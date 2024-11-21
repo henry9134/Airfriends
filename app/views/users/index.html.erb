@@ -3,17 +3,44 @@
     <div class="col-md-8 d-flex justify-content-center align-items-center">
       <%= form_with url: users_path, method: :get, local: true, class: "d-flex" do %>
         <div class="input-group">
-          <span class="input-group-text">
-            <i class="fa-solid fa-location-dot"></i>
-          </span>
-          <%= text_field_tag :query, params[:query], class: "form-control", type: "search", placeholder: "Search location", "aria-label": "Search" %>
+          <div class="form-outline" data-mdb-input-init>
+            <%= text_field_tag :query, params[:query], class: "form-control", type: "search", id: "form1", placeholder: "Search location" %>
+          </div>
+          <button type="submit" class="btn btn-primary" data-mdb-ripple-init>
+            <i class="fas fa-search"></i>
+          </button>
         </div>
-        <%= submit_tag "Search", class: "btn btn-danger ms-3" %>
       <% end %>
         <div class="">
-        <i class="fa-solid fa-filter p-3"></i>
+        <i class="fa-solid fa-filter p-3" data-bs-toggle="modal" data-bs-target="#filterModal"></i>
+        <div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="filterModalLabel">Filter Users</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <%= form_with url: users_path, method: :get, local: true do %>
+                  <div class="mb-3">
+                    <label for="genderFilter" class="form-label">Gender</label>
+                    <%= select_tag :gender, options_for_select([['Select gender', ''], ['Male', 'Male'], ['Female', 'Female']], params[:gender]), class: "form-select", id: "genderFilter" %>
+                  </div>
+                  <div class="mb-3">
+                    <label for="price-max" class="form-label">Price Max:</label>
+                    <input type="range" name="price-max" id="price-max" value="0" min="0" max="2000" class="form-range" oninput="this.nextElementSibling.value = this.value">
+                    <output>0</output> $
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <%= submit_tag "Apply Filters", class: "btn btn-primary" %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-
     </div>
   </div>
 </div>
@@ -22,28 +49,30 @@
 
 <div class="row g-0">
   <% @users.each do |user| %>
-    <div class="col-md-3 mb-5 g-0">
-      <div class="card" style="max-width: 300px; height: 550px; margin: auto; border-radius: 24px; background: #ffffff; box-shadow:  9px 9px 21px #cccccc, -9px -9px 21px #ffffff; position: relative; border: 2px solid #e0e0e0;">
-        <div class="text-center">
-          <%= cl_image_tag user.photo.key, style: "width: 280px; height: 280px; object-fit: cover; border-radius: 24px; margin: 10px 10px 0 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);" %>
-        </div>
-        <div class="card-body">
-          <h5 class="card-title text-center" style="font-size: 1.2em; color: #333;"><%= user.name %></h5>
-          <p class="card-text-age" style="text-align: center; font-size: 0.9em; color: #666;">Age : <%= user.age %> | Location: <%= user.location %></p>
-          <p class="card-text-activities" style="font-size: 0.9em; color: #333;">Activities :</p>
-          <% if user.activities.any? %>
-            <ul class="card-text-activities-list" style="font-size: 0.9em; color: #555;"><%= user.activities.map { |activity| "<li>#{activity.name}</li>" }.join.html_safe %></ul>
-            <div class="text-center mt-3">
-              <%= link_to 'Book', "/users/#{user.id}", class: 'btn btn-danger' %>
-            </div>
-          <% else %>
-            <p class="text-center" style="font-size: 0.9em; color: #666;"><%= "#{user.name} has no activities yet." %></p>
-            <div class="text-center mt-3" style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);">
-              <button class="btn btn-danger" disabled>Book</button>
-            </div>
-          <% end %>
+    <% if user.gender == params[:gender] || params[:gender].blank? %>
+      <div class="col-md-3 mb-5 g-0" data-gender="<%= user.gender %>">
+        <div class="card" style="max-width: 300px; height: 550px; margin: auto; border-radius: 24px; background: #ffffff; box-shadow:  9px 9px 21px #cccccc, -9px -9px 21px #ffffff; position: relative; border: 2px solid #e0e0e0;">
+          <div class="text-center">
+            <%= cl_image_tag user.photo.key, style: "width: 280px; height: 280px; object-fit: cover; border-radius: 24px; margin: 10px 10px 0 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);" %>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title text-center" style="font-size: 1.2em; color: #333;"><%= user.name %></h5>
+            <p class="card-text-age" style="text-align: center; font-size: 0.9em; color: #666;">Age : <%= user.age %> | Location: <%= user.location %></p>
+            <p class="card-text-activities" style="font-size: 0.9em; color: #333;">Activities :</p>
+            <% if user.activities.any? %>
+              <ul class="card-text-activities-list" style="font-size: 0.9em; color: #555;"><%= user.activities.map { |activity| "<li>#{activity.name}</li>" }.join.html_safe %></ul>
+              <div class="text-center mt-3">
+                <%= link_to 'Book', "/users/#{user.id}", class: 'btn btn-danger' %>
+              </div>
+            <% else %>
+              <p class="text-center" style="font-size: 0.9em; color: #666;"><%= "#{user.name} has no activities yet." %></p>
+              <div class="text-center mt-3" style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);">
+                <button class="btn btn-danger" disabled>Book</button>
+              </div>
+            <% end %>
+          </div>
         </div>
       </div>
-    </div>
+    <% end %>
   <% end %>
 </div>

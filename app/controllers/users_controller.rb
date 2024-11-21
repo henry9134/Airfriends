@@ -7,9 +7,11 @@ class UsersController < ApplicationController
     else
       @users = User.all
     end
+
+    if params[:gender].present?
+      @users = User.where(gender: params[:gender])
+    end
   end
-
-
 
   def show
     @user = User.find(params[:id])
