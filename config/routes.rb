@@ -1,12 +1,17 @@
 Rails.application.routes.draw do
+  get 'reviews/new'
   devise_for :users
 
-  resources :rentals, only: [:create, :update]
-  resources :users, only: [:index, :show]
+  resources :rentals, only: [:create, :update ]
+  resources :users, only: [:index, :show] do
+    resources :reviews, only: [:new, :create]
+  end
+  resources :reviews, only: [:destroy]
+  
   resources :activities, only: [:new,:create]
 
   root to: "pages#home"
-  get "/dashboard", to: "dashboard#index", as: :dashboard
+  get "/dashboard", to: "users#dashboard", as: :dashboard
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
