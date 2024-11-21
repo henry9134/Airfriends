@@ -26,7 +26,7 @@
         <% if user_signed_in? %>
           <div class="d-flex align-items-center">
             <ul class="nav-item dropdown mt-3 me-5">
-              <%= cl_image_tag current_user.photo.key, class: "avatar dropdown-toggle me-5", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, aria: { haspopup: true, expanded: false }, style: "border-radius: 50%; width: 40px; height: 40px; object-fit: cover; border: 2px solid #e0e0e0;" %>
+              <%= cl_image_tag current_user.photo.present? ? current_user.photo.key : 'path/to/random/image.jpg', class: "avatar dropdown-toggle me-5", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, aria: { haspopup: true, expanded: false }, style: "border-radius: 50%; width: 40px; height: 40px; object-fit: cover; border: 2px solid #e0e0e0;" %>
               <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="/dashboard">My profile</a>
                 <a class="dropdown-item" href="/dashboard">My bookings</a>

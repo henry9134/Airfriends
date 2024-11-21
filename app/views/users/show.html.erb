@@ -1,6 +1,6 @@
 <div class ='user-details'>
   <div class ='user-info'>
-    <%= cl_image_tag @user.photo.key, class: "profile-picture mb-3" %>
+    <%= cl_image_tag @user.photo.present? ? @user.photo.key : 'path/to/random/image.jpg', class: "profile-picture mb-3" %>
     <h2> <%= @user.name %> | <%= @user.age %> | <%= @user.gender %></h2>
     <p><i class="fa-solid fa-location-dot"></i> Location : <%= @user.location %></p>
     <p><i class="fa-solid fa-user"></i> About <strong><%= @user.name %></strong> :</p>
@@ -32,7 +32,7 @@
       <% end %>
     </div>
 
-    <%= link_to "Make a review", new_user_review_path(@user), class: "btn btn-primary"%> 
+    <%= link_to "Make a review", new_user_review_path(@user), class: "btn btn-primary"%>
 
     <div class="reviews_container">
       <p><strong>Reviews</strong></p>
