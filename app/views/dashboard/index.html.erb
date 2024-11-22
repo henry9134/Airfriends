@@ -1,20 +1,49 @@
 <div class ='dashboard_page mb-5' style="flex-grow: 1;">
   <div class ='User-info d-flex align-items-center'>
     <div class ='profile picture'>
-      <%= cl_image_tag @user.photo.present? ? @user.photo.key : 'path/to/random/image.jpg', style: "width: 280px; height: 280px; object-fit: cover; border-radius: 24px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); margin-left: 10px;" %>
+      <div style="position: relative; display: inline-block; margin-left: 10px;">
+        <% if @user.photo.present? %>
+          <%= cl_image_tag @user.photo.key, style: "width: 280px; height: 280px; object-fit: cover; border-radius: 24px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);" %>
+        <% else %>
+          <%= image_tag "https://static.miraheze.org/kiddancerswiki/a/a6/Mayoral-dylan-image.jpg", style: "width: 280px; height: 280px; object-fit: cover; border-radius: 24px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);" %>
+        <% end %>
+        <%= link_to '<i class="penedit fa-solid fa-pen-to-square"></i>'.html_safe, "#editPhotoModal", class: 'btn btn-link p-0 shadow' + ' position-absolute' + ' top-1 start-0 m-2', title: 'Edit Photo', data: { bs_toggle: 'modal', bs_target: '#editPhotoModal' } %>
+      </div>
+      <div class="modal fade" id="editPhotoModal" tabindex="-1" aria-labelledby="editPhotoModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="editPhotoModalLabel">Edit Photo</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <%= simple_form_for @user, url: user_path(@user), method: :patch, html: { class: 'form' } do |form| %>
+                <div class="mb-3">
+                  <%= form.input :photo, as: :file, label: "Upload New Photo", input_html: { class: "form-control" } %>
+                </div>
+                <div class="mb-3">
+                  <%= form.submit "Save Changes", class: "btn btn-primary" %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class ='user-details'>
+    <div class='user-details'>
       <%= render 'user_details' %>
     </div>
-
     <div class='user-activities w-100 d-flex flex-column align-items-center' style="height: 300px; overflow-y: auto;">
       <h1><strong>My Activities</strong></h1>
       <% if @user.activities.any? %>
         <ul class="list-unstyled">
           <% @user.activities.each do |activity| %>
             <li class="activity-item" style="margin: 5px 0; font-size: 1.5em; color: #333;">
-              <%= activity.name %> | <%= number_to_currency(activity.price) %>
-              <%= link_to '<i class="pen fa-solid fa-pen-to-square"></i>'.html_safe, "#editActivityModal#{activity.id}", class: 'btn btn-link p-0 ms-2', title: 'Edit Activity', data: { bs_toggle: 'modal', bs_target: "#editActivityModal#{activity.id}" } %>
+              <%= activity.name.capitalize %> | <%= number_to_currency(activity.price) %>
+              <div class="float-end">
+                <%= link_to '<i class="pen fa-solid fa-pen-to-square"></i>'.html_safe, "#editActivityModal#{activity.id}", class: 'btn btn-link p-0 ms-2', title: 'Edit Activity', data: { bs_toggle: 'modal', bs_target: "#editActivityModal#{activity.id}" } %>
+                <%= link_to '<i class="trash fa-solid fa-trash"></i>'.html_safe, activity_path(activity), data: { turbo_method: :delete, turbo_confirm: 'Are you sure you want to delete this activity?' }, class: 'btn btn-link p-0 ms-2', title: 'Delete Activity' %>
+              </div>
               <div class="modal fade" id="editActivityModal<%= activity.id %>" tabindex="-1" aria-labelledby="editActivityModalLabel<%= activity.id %>" aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">
@@ -23,17 +52,15 @@
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                      <%= form_with url: root_path, method: :patch, local: true do |form| %>
+                      <%= simple_form_for activity do |form| %>
                         <div class="mb-3">
-                          <%= form.label :name, "Activity Name" %>
-                          <%= form.text_field :name, class: "form-control", value: activity.name %>
+                          <%= form.input :name, label: "Activity Name", value: activity.name.capitalize ,placeholder: activity.name.capitalize %>
                         </div>
                         <div class="mb-3">
-                          <%= form.label :price, "Price" %>
-                          <%= form.number_field :price, class: "form-control", value: activity.price, step: "0.01" %>
+                          <%= form.input :price, label: "Price ($)", value: activity.price, placeholder: activity.price %>
                         </div>
                         <div class="mb-3">
-                          <%= form.submit "Save Changes", class: "btn btn-primary" %>
+                          <%= form.submit "Add Activity", class: "btn btn-primary" %>
                         </div>
                       <% end %>
                     </div>
@@ -43,8 +70,59 @@
             </li>
           <% end %>
         </ul>
+        <% if @user.activities.count < 3 %>
+          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addActivityModal">Add an Activity</button>
+          <div class="modal fade" id="addActivityModal" tabindex="-1" aria-labelledby="addActivityModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="addActivityModalLabel">Add New Activity</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <%= simple_form_for @new_activity do |form| %>
+                    <div class="mb-3">
+                      <%= form.input :name, label: "Activity Name", value: @new_activity.name, placeholder: "What activity do you offer?" %>
+                    </div>
+                    <div class="mb-3">
+                      <%= form.input :price, label: "Price ($)", value: @new_activity.price, placeholder: "What is the price of your activity?" %>
+                    </div>
+                    <div class="mb-3">
+                      <%= form.submit "Add Activity", class: "btn btn-primary" %>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
       <% else %>
-        <p style="color: #666;">No activities available.</p>
+        <% if @user.activities.count == 0 %>
+          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addActivityModal">Become a friend</button>
+          <div class="modal fade" id="addActivityModal" tabindex="-1" aria-labelledby="addActivityModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="addActivityModalLabel">List your first activity</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <%= simple_form_for @new_activity do |form| %>
+                    <div class="mb-3">
+                      <%= form.input :name, label: "Activity Name", placeholder: "What activity do you offer?" %>
+                    </div>
+                    <div class="mb-3">
+                      <%= form.input :price, label: "Price ($)", placeholder: "What is the price of your activity?" %>
+                    </div>
+                    <div class="mb-3">
+                      <%= form.submit "Add Activity", class: "btn btn-primary" %>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
       <% end %>
     </div>
   </div>

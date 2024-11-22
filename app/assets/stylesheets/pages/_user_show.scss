@@ -5,7 +5,7 @@
   flex-direction: column;
   align-items: left;
   gap: 10px;
-  margin: 20px;
+  margin: 10px 20px 20px 20px;
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -60,4 +60,16 @@
   border-radius: 8px;
   background-color: #f9f9f9;
   max-width: 600px;
+}
+
+.star {
+  color: #ffcc00;
+}
+
+.star_empty {
+  color: #ccc;
+}
+
+.location {
+  color: #dc3535;
 }
