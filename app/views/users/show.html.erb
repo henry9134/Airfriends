@@ -12,7 +12,7 @@
   </div>
 </div>
 <div class='row justify-content-center'>
-  <div class='col-12 d-flex flex-column align-items-center'>
+  <div class='col-4 d-flex flex-column align-items-center'>
     <div class='user-activities text-center'>
       <h3>Activities</h3>
       <div class="activity-list">
@@ -34,14 +34,21 @@
         <%= f.submit "Submit Rental", class: "submit-rental btn btn-danger" %>
       <% end %>
     </div>
-    <div class="reviews_container">
-      <p><strong>Reviews</strong></p>
+  </div>
+    <div class="col-4 reviews_container">
+      <p class= 'text-center'><strong>Reviews</strong></p>
       <% @user.reviews_as_friend.each do |review| %>
-        <div class="review">
-          <p><%= review.reviewer.name%>: <%= review.content %></p>
-          <p><%= review.rating %>/5</p>
+        <div class="review user-activities my-3">
+          <p><strong><%= review.reviewer.name%></strong></p>
+          <p><%= review.content %></p>
+        <p>
+  <%= review.rating %>/5
+  <% review.rating.times do %>
+    <i class="fa-solid fa-star"></i>
+  <% end %>
+</p>
+
         </div>
       <% end %>
     </div>
-  </div>
 </div>
