@@ -5,7 +5,7 @@
         <p>Date: <%= rental.booking_date.strftime("%A %d %B %Y") %></p>
         <p><strong><%= rental.activity.user.name %></strong> | <%= rental.activity.name %></p>
       </div>
-      <%= link_to 'Add Review', new_user_review_path(rental.activity.user), class: 'btn btn-success mt-2'%>
+      <%= link_to 'Add Review', new_user_review_path(rental.activity.user), class: 'gumroad mt-2', style: "background-color: rgba(146, 255, 142, 0.45); color: #000;" %>
     </div>
   <% end %>
 <% end %>

@@ -1,8 +1,8 @@
 .home-background {
-  background-image: url('https://images.pexels.com/photos/27462424/pexels-photo-27462424/free-photo-of-people-riding-on-a-roller-coaster-at-an-amusement-park.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+  background-image: url('https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
   height: 400px;
   background-size: cover;
-  background-position: center;
+  background-position: center 37%; /* Moved the image slightly down */
   display: flex;
   flex-direction: column;
   justify-content: center;

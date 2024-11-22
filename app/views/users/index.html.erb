@@ -6,8 +6,8 @@
           <div class="form-outline" data-mdb-input-init>
             <%= text_field_tag :query, params[:query], class: "form-control", type: "search", id: "form1", placeholder: "Search location" %>
           </div>
-          <button type="submit" class="btn btn-primary" data-mdb-ripple-init>
-            <i class="fas fa-search"></i>
+          <button type="submit" class="btn btn-primary" style="background-color: #0c3567e6; color: #e5e5e5;" data-mdb-ripple-init>
+            <i class="fas fa-search" ></i>
           </button>
         </div>
       <% end %>
@@ -32,8 +32,8 @@
                     <output>0</output> $
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <%= submit_tag "Apply Filters", class: "btn btn-primary" %>
+                    <button type="button" class="gumroad-grey" data-bs-dismiss="modal">Close</button>
+                    <%= submit_tag "Apply Filters", class: "gumroad", style: "color: #000;" %>
                   </div>
                 <% end %>
               </div>
@@ -62,7 +62,7 @@
             <p class="card-text-activities" style="font-size: 0.9em; color: #333;">Activities :</p>
             <ul class="card-text-activities-list" style="font-size: 0.9em; color: #555;"><%= user.activities.map { |activity| "<li>#{activity.name}</li>" }.join.html_safe %></ul>
             <div class="text-center mt-3">
-              <%= link_to 'Book', "/users/#{user.id}", class: 'btn btn-danger' %>
+              <%= link_to 'Book', "/users/#{user.id}", class: 'gumroad', style: "color: #000;" %>
             </div>
           </div>
         </div>

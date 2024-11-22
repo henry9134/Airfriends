@@ -22,7 +22,7 @@
             <p class="card-text-activities" style="font-size: 0.9em; color: #333;">Activities :</p>
             <ul class="card-text-activities-list" style="font-size: 0.9em; color: #555;"><%= user.activities.map { |activity| "<li>#{activity.name}</li>" }.join.html_safe %></ul>
             <div class="text-center mt-3">
-              <%= link_to 'Book', "/users/#{user.id}", class: 'btn btn-outline-danger' %>
+              <%= link_to 'Book', "/users/#{user.id}", class: 'gumroad', style: "color: #000;" %>
             </div>
           </div>
         </div>
@@ -30,6 +30,6 @@
     <% end %>
   </div>
   <div class="text-center mt-4 mb-5">
-    <a href="/users" class="btn btn-danger">See More</a>
+    <a href="/users" class="gumroad-color">See More</a>
   </div>
 </div>

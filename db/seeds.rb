@@ -35,21 +35,21 @@ users = [
       { name: "Merchandise Design Workshop", price: 200, description: "Learn about merchandise design inspired by Travis's brand." }
     ]
   },
-  # {
-  #   name: "Will Vanderwyden",
-  #   email: "will@example.com",
-  #   password: "password123",
-  #   description: "Phatest arrow in Le Wagon, aspiring dodgeball god.",
-  #   location: "Shinjuku",
-  #   age: 18,
-  #   gender: "Male",
-  #   image_url: "https://d26jy9fbi4q9wx.cloudfront.net/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBNUNNQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--b1853a1231b8914d08d5cffc2d87feab281d69d3/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2RTNKbGMybDZaVjkwYjE5bWFXeHNXd2hwQWNocEFjaDdCam9KWTNKdmNEb09ZWFIwWlc1MGFXOXUiLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--b67d9ded4d28d0969fbb98b4c21b79257705a99a/great%20me.jpg",
-  #   activities: [
-  #     { name: "Dodgeball masterclass", price: 10000, description: "Learn dodgeball from Will Vanderwyden." },
-  #     { name: "Squeeky chair workshop", price: 5000, description: "Learn how to use a squeeky chair from Will Vanderwyden." },
-  #     { name: "Private dance lesson", price: 12000, description: "Get access to a private dance lesson with Will Vanderwyden." }
-  #   ]
-  # },
+  {
+    name: "Will Vanderwyden",
+    email: "will@example.com",
+    password: "password123",
+    description: "Phatest arrow in Le Wagon, aspiring dodgeball god.",
+    location: "Shinjuku",
+    age: 18,
+    gender: "Male",
+    image_url: "https://d26jy9fbi4q9wx.cloudfront.net/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBNUNNQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--b1853a1231b8914d08d5cffc2d87feab281d69d3/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2RTNKbGMybDZaVjkwYjE5bWFXeHNXd2hwQWNocEFjaDdCam9KWTNKdmNEb09ZWFIwWlc1MGFXOXUiLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--b67d9ded4d28d0969fbb98b4c21b79257705a99a/great%20me.jpg",
+    activities: [
+      { name: "Dodgeball masterclass", price: 10000, description: "Learn dodgeball from Will Vanderwyden." },
+      { name: "Squeeky chair workshop", price: 5000, description: "Learn how to use a squeeky chair from Will Vanderwyden." },
+      { name: "Private dance lesson", price: 12000, description: "Get access to a private dance lesson with Will Vanderwyden." }
+    ]
+  },
   {
     name: "Dwayne Johnson",
     email: "dwayne@example.com",
