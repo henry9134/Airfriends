@@ -40,15 +40,13 @@
             </ul>
           </div>
         <% else %>
-          <%= link_to "Login", new_user_session_path, class: "btn btn-outline-danger me-3" %>
-          <%= link_to "Sign up for free", "/users/sign_up", class: "btn btn-danger me-5", data: { mdb_ripple_init: true } %>
+          <%= link_to "Login", new_user_session_path, class: "gumroad-color me-3", style: "background-color: white; color: black;"%>
+          <%= link_to "Sign up for free", "/users/sign_up", class: "gumroad-color me-5", style: "background-color: white; color: black;", data: { mdb_ripple_init: true } %>
         <% end %>
       </div>
     </nav>
-
     <%= yield %>
     <%= render "shared/flashes" %>
-
     <footer class="text-white text-center py-3" style="background-color: #0c3567e6; position: relative; bottom: 0; width: 100%;">
       <div class="container mb-3 mt-2">
         <p class="mb-0" style="color: #e5e5e5;">© 2024 AirFriends. All rights reserved.</p>
@@ -56,6 +54,5 @@
         <a href="/" class="text-light">Terms of Service</a>
       </div>
     </footer>
-
   </body>
 </html>
