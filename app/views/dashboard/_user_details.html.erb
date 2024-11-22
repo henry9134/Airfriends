@@ -1,4 +1,4 @@
-<h2>Name : <%= @user.name %> <%= link_to '<i class="pen fa-solid fa-pen-to-square"></i>'.html_safe, "#editNameModal", class: 'btn btn-link p-0', title: 'Edit Name', data: { bs_toggle: 'modal', bs_target: '#editNameModal' } %></h2>
+<h2>Name : <%= @user.name.present? ? @user.name : '<span class="no small" style="font-size: 0.8em; color: #6c757d;">What is your name ?</span>'.html_safe %> <%= link_to '<i class="pen fa-solid fa-pen-to-square" style="text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.4);"></i>'.html_safe, "#editNameModal", class: 'btn btn-link p-0', title: 'Edit Name', data: { bs_toggle: 'modal', bs_target: '#editNameModal' } %></h2>
 <div class="modal fade" id="editNameModal" tabindex="-1" aria-labelledby="editNameModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -19,7 +19,7 @@
     </div>
   </div>
 </div>
-<h2>Age : <%= @user.age %> <%= link_to '<i class="pen fa-solid fa-pen-to-square"></i>'.html_safe, "#editAgeModal", class: 'btn btn-link p-0', title: 'Edit Age', data: { bs_toggle: 'modal', bs_target: '#editAgeModal' } %></h2>
+<h2>Age : <%= @user.age.present? ? @user.age : '<span class="no small" style="font-size: 0.8em; color: #6c757d;">How old are you ?</span>'.html_safe %> <%= link_to '<i class="pen fa-solid fa-pen-to-square" style="text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.4);"></i>'.html_safe, "#editAgeModal", class: 'btn btn-link p-0', title: 'Edit Age', data: { bs_toggle: 'modal', bs_target: '#editAgeModal' } %></h2>
 <div class="modal fade" id="editAgeModal" tabindex="-1" aria-labelledby="editAgeModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -40,7 +40,7 @@
     </div>
   </div>
 </div>
-<h2>Gender : <%= @user.gender %> <%= link_to '<i class="pen fa-solid fa-pen-to-square"></i>'.html_safe, "#editGenderModal", class: 'btn btn-link p-0', title: 'Edit Gender', data: { bs_toggle: 'modal', bs_target: '#editGenderModal' } %></h2>
+<h2>Gender : <%= @user.gender.present? ? @user.gender : '<span class="no small" style="font-size: 0.8em; color: #6c757d;">Are you a man or a woman ?</span>'.html_safe %> <%= link_to '<i class="pen fa-solid fa-pen-to-square" style="text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.4);"></i>'.html_safe, "#editGenderModal", class: 'btn btn-link p-0', title: 'Edit Gender', data: { bs_toggle: 'modal', bs_target: '#editGenderModal' } %></h2>
 <div class="modal fade" id="editGenderModal" tabindex="-1" aria-labelledby="editGenderModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -61,7 +61,7 @@
     </div>
   </div>
 </div>
-<h2>Location : <%= @user.location %> <%= link_to '<i class="pen fa-solid fa-pen-to-square"></i>'.html_safe, "#editLocationModal", class: 'btn btn-link p-0', title: 'Edit Location', data: { bs_toggle: 'modal', bs_target: '#editLocationModal' } %></h2>
+<h2>Location : <%= @user.location.present? ? @user.location : '<span class="no small" style="font-size: 0.8em; color: #6c757d;">Where are you from ?</span>'.html_safe %> <%= link_to '<i class="pen fa-solid fa-pen-to-square" style="text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.4);"></i>'.html_safe, "#editLocationModal", class: 'btn btn-link p-0', title: 'Edit Location', data: { bs_toggle: 'modal', bs_target: '#editLocationModal' } %></h2>
 <div class="modal fade" id="editLocationModal" tabindex="-1" aria-labelledby="editLocationModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -82,7 +82,7 @@
     </div>
   </div>
 </div>
-<h2>About me : <%= @user.description %> <%= link_to '<i class="pen fa-solid fa-pen-to-square"></i>'.html_safe, "#editDescriptionModal", class: 'btn btn-link p-0', title: 'Edit Description', data: { bs_toggle: 'modal', bs_target: '#editDescriptionModal' } %></h2>
+<h2>About me : <%= @user.description.present? ? @user.description : '<span class="no small" style="font-size: 0.8em; color: #6c757d;">Tell us more about you ...</span>'.html_safe %> <%= link_to '<i class="pen fa-solid fa-pen-to-square" style="text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.4);"></i>'.html_safe, "#editDescriptionModal", class: 'btn btn-link p-0', title: 'Edit Description', data: { bs_toggle: 'modal', bs_target: '#editDescriptionModal' } %></h2>
 <div class="modal fade" id="editDescriptionModal" tabindex="-1" aria-labelledby="editDescriptionModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">

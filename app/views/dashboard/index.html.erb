@@ -41,8 +41,8 @@
             <li class="activity-item" style="margin: 5px 0; font-size: 1.5em; color: #333;">
               <%= activity.name.capitalize %> | <%= number_to_currency(activity.price) %>
               <div class="float-end">
-                <%= link_to '<i class="pen fa-solid fa-pen-to-square"></i>'.html_safe, "#editActivityModal#{activity.id}", class: 'btn btn-link p-0 ms-2', title: 'Edit Activity', data: { bs_toggle: 'modal', bs_target: "#editActivityModal#{activity.id}" } %>
-                <%= link_to '<i class="trash fa-solid fa-trash"></i>'.html_safe, activity_path(activity), data: { turbo_method: :delete, turbo_confirm: 'Are you sure you want to delete this activity?' }, class: 'btn btn-link p-0 ms-2', title: 'Delete Activity' %>
+                <%= link_to '<i class="pen fa-solid fa-pen-to-square" style="text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.4);"></i>'.html_safe, "#editActivityModal#{activity.id}", class: 'btn btn-link p-0 ms-2', title: 'Edit Activity', data: { bs_toggle: 'modal', bs_target: "#editActivityModal#{activity.id}" } %>
+                <%= link_to '<i class="trash fa-solid fa-trash" style="color: red; text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.5);"></i>'.html_safe, activity_path(activity), data: { turbo_method: :delete, turbo_confirm: 'Are you sure you want to delete this activity?' }, class: 'btn btn-link p-0 ms-2', title: 'Delete Activity' %>
               </div>
               <div class="modal fade" id="editActivityModal<%= activity.id %>" tabindex="-1" aria-labelledby="editActivityModalLabel<%= activity.id %>" aria-hidden="true">
                 <div class="modal-dialog">
@@ -98,6 +98,7 @@
         <% end %>
       <% else %>
         <% if @user.activities.count == 0 %>
+          <p class="no-activities" style="margin-bottom: 10px;">No activities yet.</p>
           <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addActivityModal">Become a friend</button>
           <div class="modal fade" id="addActivityModal" tabindex="-1" aria-labelledby="addActivityModalLabel" aria-hidden="true">
             <div class="modal-dialog">
