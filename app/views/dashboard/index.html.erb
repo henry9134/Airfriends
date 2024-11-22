@@ -1,10 +1,51 @@
-<div class ='dashboard_page mb-5'>
+<div class ='dashboard_page mb-5' style="flex-grow: 1;">
   <div class ='User-info d-flex align-items-center'>
     <div class ='profile picture'>
       <%= cl_image_tag @user.photo.present? ? @user.photo.key : 'path/to/random/image.jpg', style: "width: 280px; height: 280px; object-fit: cover; border-radius: 24px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); margin-left: 10px;" %>
     </div>
     <div class ='user-details'>
       <%= render 'user_details' %>
+    </div>
+
+    <div class='user-activities w-100 d-flex flex-column align-items-center' style="height: 300px; overflow-y: auto;">
+      <h1><strong>My Activities</strong></h1>
+      <% if @user.activities.any? %>
+        <ul class="list-unstyled">
+          <% @user.activities.each do |activity| %>
+            <li class="activity-item" style="margin: 5px 0; font-size: 1.5em; color: #333;">
+              <%= activity.name %> | <%= number_to_currency(activity.price) %>
+              <%= link_to '<i class="pen fa-solid fa-pen-to-square"></i>'.html_safe, "#editActivityModal#{activity.id}", class: 'btn btn-link p-0 ms-2', title: 'Edit Activity', data: { bs_toggle: 'modal', bs_target: "#editActivityModal#{activity.id}" } %>
+              <div class="modal fade" id="editActivityModal<%= activity.id %>" tabindex="-1" aria-labelledby="editActivityModalLabel<%= activity.id %>" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="editActivityModalLabel<%= activity.id %>">Edit Activity</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <%= form_with url: root_path, method: :patch, local: true do |form| %>
+                        <div class="mb-3">
+                          <%= form.label :name, "Activity Name" %>
+                          <%= form.text_field :name, class: "form-control", value: activity.name %>
+                        </div>
+                        <div class="mb-3">
+                          <%= form.label :price, "Price" %>
+                          <%= form.number_field :price, class: "form-control", value: activity.price, step: "0.01" %>
+                        </div>
+                        <div class="mb-3">
+                          <%= form.submit "Save Changes", class: "btn btn-primary" %>
+                        </div>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p style="color: #666;">No activities available.</p>
+      <% end %>
     </div>
   </div>
   <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -15,15 +56,15 @@
       <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Rentals</button>
     </li>
   </ul>
-  <div class="tab-content" id="myTabContent">
+  <div class="tab-content text-center" id="myTabContent">
     <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-      <div class='row'>
+      <div class='row justify-content-center'>
         <%= render 'tab_pending' %>
         <%= render 'tab_confirmed_requests' %>
       </div>
     </div>
     <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-      <div class='row'>
+      <div class='row justify-content-center'>
         <%= render 'tab_upcoming_rentals' %>
         <%= render 'tab_past_rentals' %>
       </div>

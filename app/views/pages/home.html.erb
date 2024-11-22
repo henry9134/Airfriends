@@ -1,33 +1,35 @@
-<div class="title">
-  <h1>AirFriends</h1>
-  <p>Have fun, make new friends.</p>
-</div>
-<div class="home-background"></div>
-<div class="trending-friends">
-  <h2 class="text-center">Trending friends</h2>
-  <hr class="ms-4 me-4">
-</div>
-<div class="row g-0">
-  <% users_to_display = @users.select { |user| ["Dua Lipa", "Kylian Mbappé", "Kanye West"].include?(user.name) } %>
-  <% users_to_display.each do |user| %>
-    <div class="col-md-4 mb-2">
-      <div class="card">
-        <div class="text-center">
-          <%= cl_image_tag user.photo.present? ? user.photo.key : 'path/to/random/image.jpg', style: "width: 100%; height: auto; max-width: 280px; border-radius: 24px; margin: 10px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); transition: transform 0.3s;" %>
-        </div>
-        <div class="card-body">
-          <h5 class="card-title text-center" style="font-size: 1.2em; color: #333;"><%= user.name %></h5>
-          <p class="card-text-age" style="text-align: center; font-size: 0.9em; color: #666;">Age : <%= user.age %> | Location: <%= user.location %></p>
-          <p class="card-text-activities" style="font-size: 0.9em; color: #333;">Activities :</p>
-          <ul class="card-text-activities-list" style="font-size: 0.9em; color: #555;"><%= user.activities.map { |activity| "<li>#{activity.name}</li>" }.join.html_safe %></ul>
-          <div class="text-center mt-3">
-            <%= link_to 'Book', "/users/#{user.id}", class: 'btn btn-outline-danger' %>
+<div style="flex-grow: 1;">
+  <div class="title">
+    <h1>AirFriends</h1>
+    <p>Have fun, make new friends.</p>
+  </div>
+  <div class="home-background"></div>
+  <div class="trending-friends">
+    <h2 class="text-center">Trending friends</h2>
+    <hr class="ms-4 me-4">
+  </div>
+  <div class="row g-0">
+    <% users_to_display = @users.select { |user| ["Dua Lipa", "Kylian Mbappé", "Kanye West"].include?(user.name) } %>
+    <% users_to_display.each do |user| %>
+      <div class="col-md-4 mb-2">
+        <div class="card">
+          <div class="text-center">
+            <%= cl_image_tag user.photo.key, style: "width: 100%; height: auto; max-width: 280px; border-radius: 24px; margin: 10px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); transition: transform 0.3s;" %>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title text-center" style="font-size: 1.2em; color: #333;"><%= user.name %></h5>
+            <p class="card-text-age" style="text-align: center; font-size: 0.9em; color: #666;">Age : <%= user.age %> | Location: <%= user.location %></p>
+            <p class="card-text-activities" style="font-size: 0.9em; color: #333;">Activities :</p>
+            <ul class="card-text-activities-list" style="font-size: 0.9em; color: #555;"><%= user.activities.map { |activity| "<li>#{activity.name}</li>" }.join.html_safe %></ul>
+            <div class="text-center mt-3">
+              <%= link_to 'Book', "/users/#{user.id}", class: 'btn btn-outline-danger' %>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  <% end %>
-</div>
-<div class="text-center mt-4 mb-5">
-  <a href="/users" class="btn btn-danger">See More</a>
+    <% end %>
+  </div>
+  <div class="text-center mt-4 mb-5">
+    <a href="/users" class="btn btn-danger">See More</a>
+  </div>
 </div>
