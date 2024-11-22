@@ -9,6 +9,8 @@ class DashboardController < ApplicationController
 
     @confirmed_requests = Rental.joins(:activity).where(activities: {user_id: @user.id}).where(status: "accepted")
     @pending_requests = @user.requests.where(status: "pending")
+    @new_activity = Activity.new
+    @new_activity.user = current_user
   end
   # @upcoming_bookings.where(status: "pending").where.not(id: @user)
 end

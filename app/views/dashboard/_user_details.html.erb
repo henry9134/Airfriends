@@ -7,10 +7,9 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <%= form_with url: user_path(@user), method: :patch, local: true do |form| %>
+        <%= simple_form_for @user, url: user_path(@user), method: :put, html: { class: 'form' } do |form| %>
           <div class="mb-3">
-            <%= form.label :name, "New Name" %>
-            <%= form.text_field :name, class: "form-control", value: @user.name %>
+            <%= form.input :name, input_html: { class: "form-control", value: @user.name.capitalize } %>
           </div>
           <div class="mb-3">
             <%= form.submit "Save Changes", class: "btn btn-primary" %>
@@ -29,10 +28,9 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <%= form_with url: user_path(@user), method: :patch, local: true do |form| %>
+        <%= simple_form_for @user, url: user_path(@user), method: :patch, html: { class: 'form' } do |form| %>
           <div class="mb-3">
-            <%= form.label :age, "New Age" %>
-            <%= form.number_field :age, class: "form-control", value: @user.age %>
+            <%= form.input :age, input_html: { class: "form-control", value: @user.age }, as: :integer %>
           </div>
           <div class="mb-3">
             <%= form.submit "Save Changes", class: "btn btn-primary" %>
@@ -51,10 +49,9 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <%= form_with url: user_path(@user), method: :patch, local: true do |form| %>
+        <%= simple_form_for @user, url: user_path(@user), method: :patch, html: { class: 'form' } do |form| %>
           <div class="mb-3">
-            <%= form.label :gender, "New Gender" %>
-            <%= form.select :gender, options_for_select([['Select gender', ''], ['Male', 'Male'], ['Female', 'Female']], @user.gender), class: "form-select" %>
+            <%= form.input :gender, collection: [['Select gender', ''], ['Male', 'Male'], ['Female', 'Female']], label: "New Gender", input_html: { class: "form-select" } %>
           </div>
           <div class="mb-3">
             <%= form.submit "Save Changes", class: "btn btn-primary" %>
@@ -73,10 +70,9 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <%= form_with url: user_path(@user), method: :patch, local: true do |form| %>
+        <%= simple_form_for @user, url: user_path(@user), method: :patch, html: { class: 'form' } do |form| %>
           <div class="mb-3">
-            <%= form.label :location, "New Location" %>
-            <%= form.text_field :location, class: "form-control", value: @user.location %>
+            <%= form.input :location, label: "New Location", input_html: { class: "form-control", value: @user.location } %>
           </div>
           <div class="mb-3">
             <%= form.submit "Save Changes", class: "btn btn-primary" %>
@@ -95,10 +91,9 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <%= form_with url: user_path(@user), method: :patch, local: true do |form| %>
+        <%= simple_form_for @user, url: user_path(@user), method: :patch, html: { class: 'form' } do |form| %>
           <div class="mb-3">
-            <%= form.label :description, "New Description" %>
-            <%= form.text_area :description, class: "form-control", value: @user.description %>
+            <%= form.input :description, label: "New Description", input_html: { class: "form-control", value: @user.description } %>
           </div>
           <div class="mb-3">
             <%= form.submit "Save Changes", class: "btn btn-primary" %>

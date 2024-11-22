@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index, :show]
+  skip_before_action :authenticate_user!, only: [:index, :show, :edit, :update]
 
   def index
     if params[:query].present?
@@ -13,9 +13,25 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+    @user
+  end
+
+  def update
+    @user = User.find(params[:id])
+    @user.update(user_params)
+    redirect_to dashboard_path
+  end
+
   def show
     @user = User.find(params[:id])
     @activities = @user.activities
     @rental = Rental.new
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:name, :age, :gender, :location, :photo, :description)
   end
 end

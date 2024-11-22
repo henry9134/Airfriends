@@ -46,27 +46,24 @@
 </div>
 <div class="row g-0">
   <% @users.each do |user| %>
-    <% if user.gender == params[:gender] || params[:gender].blank? %>
+    <% if (user.gender == params[:gender] || params[:gender].blank?) && user.activities.any? %>
       <div class="col-md-3 mb-5 g-0" data-gender="<%= user.gender %>">
         <div class="card" style="max-width: 300px; height: 550px; margin: auto; border-radius: 24px; background: #ffffff; box-shadow:  9px 9px 21px #cccccc, -9px -9px 21px #ffffff; position: relative; border: 2px solid #e0e0e0;">
           <div class="text-center">
-            <%= cl_image_tag user.photo.present? ? user.photo.key : 'https://www.famousbirthdays.com/faces/mayoral-dylan-image.jpg', style: "width: 280px; height: 280px; object-fit: cover; border-radius: 24px; margin: 10px 10px 0 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);" %>
+            <% if user.photo.present? %>
+              <%= cl_image_tag user.photo.key, style: "width: 280px; height: 280px; object-fit: cover; border-radius: 24px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); margin-top: 5px" %>
+            <% else %>
+              <%= image_tag "https://static.miraheze.org/kiddancerswiki/a/a6/Mayoral-dylan-image.jpg", style: "width: 280px; height: 280px; object-fit: cover; border-radius: 24px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); margin-top: 5px" %>
+            <% end %>
           </div>
           <div class="card-body">
             <h5 class="card-title text-center" style="font-size: 1.2em; color: #333;"><%= user.name %></h5>
             <p class="card-text-age" style="text-align: center; font-size: 0.9em; color: #666;">Age : <%= user.age %> | Location: <%= user.location %></p>
             <p class="card-text-activities" style="font-size: 0.9em; color: #333;">Activities :</p>
-            <% if user.activities.any? %>
-              <ul class="card-text-activities-list" style="font-size: 0.9em; color: #555;"><%= user.activities.map { |activity| "<li>#{activity.name}</li>" }.join.html_safe %></ul>
-              <div class="text-center mt-3">
-                <%= link_to 'Book', "/users/#{user.id}", class: 'btn btn-danger' %>
-              </div>
-            <% else %>
-              <p class="text-center" style="font-size: 0.9em; color: #666;"><%= "#{user.name} has no activities yet." %></p>
-              <div class="text-center mt-3" style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);">
-                <button class="btn btn-danger" disabled>Book</button>
-              </div>
-            <% end %>
+            <ul class="card-text-activities-list" style="font-size: 0.9em; color: #555;"><%= user.activities.map { |activity| "<li>#{activity.name}</li>" }.join.html_safe %></ul>
+            <div class="text-center mt-3">
+              <%= link_to 'Book', "/users/#{user.id}", class: 'btn btn-danger' %>
+            </div>
           </div>
         </div>
       </div>

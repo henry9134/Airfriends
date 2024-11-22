@@ -1,6 +1,5 @@
 class RentalsController < ApplicationController
 
-
   def create
     @user = current_user
     @rental = Rental.new(rental_params)
@@ -9,7 +8,6 @@ class RentalsController < ApplicationController
     if @rental.save
       redirect_to dashboard_path, notice: 'Rental successfully created.'
     else
-      raise
       render :new
     end
 
@@ -30,6 +28,4 @@ class RentalsController < ApplicationController
   def rental_params
     params.require(:rental).permit(:booking_date, :activity_id, :status, :user_id)
   end
-
-
-  end
+end
