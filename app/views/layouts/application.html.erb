@@ -11,7 +11,7 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-  <body>
+  <body style="height: 100vh; display: flex; flex-direction: column;">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);">
       <div class="d-flex align-items-center ms-5">
         <%= link_to image_tag('logo.png', class: 'navbar-brand', alt: 'AirFriends Logo', size: "50x60", style: "filter: brightness(0) invert(1); margin-left: 50px;"), '/', class: 'navbar-brand' %>
@@ -41,14 +41,17 @@
         <% end %>
       </div>
     </nav>
+
     <%= yield %>
     <%= render "shared/flashes" %>
+
+    <footer class="bg-dark text-white text-center py-3" style="position: relative; bottom: 0; width: 100%;">
+      <div class="container mb-3 mt-2">
+        <p class="mb-0">© 2024 AirFriends. All rights reserved.</p>
+        <a href="/" class="text-white">Privacy Policy</a>
+        <a href="/" class="text-white">Terms of Service</a>
+      </div>
+    </footer>
+
   </body>
-  <footer class="bg-dark text-white text-center py-3" style="position: relative; bottom: 0; width: 100%; margin-top: 150px;">
-    <div class="container mb-3 mt-2">
-      <p class="mb-0">© 2024 AirFriends. All rights reserved.</p>
-      <a href="/privacy" class="text-white">Privacy Policy</a> |
-      <a href="/terms" class="text-white">Terms of Service</a>
-    </div>
-  </footer>
 </html>

@@ -1,5 +1,110 @@
-<h2>Name : <%= @user.name %> <i class="pen fa-solid fa-pen-to-square"></i></h2>
-<h2>Age : <%= @user.age %> <i class="pen fa-solid fa-pen-to-square"></i></h2>
-<h2>Gender : <%= @user.gender %> <i class="pen fa-solid fa-pen-to-square"></i></h2>
-<h2>Location : <%= @user.location %> <i class="pen fa-solid fa-pen-to-square"></i></h2>
-<h2>About me : <%= @user.description %> <i class="pen fa-solid fa-pen-to-square"></i></h2>
+<h2>Name : <%= @user.name %> <%= link_to '<i class="pen fa-solid fa-pen-to-square"></i>'.html_safe, "#editNameModal", class: 'btn btn-link p-0', title: 'Edit Name', data: { bs_toggle: 'modal', bs_target: '#editNameModal' } %></h2>
+<div class="modal fade" id="editNameModal" tabindex="-1" aria-labelledby="editNameModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editNameModalLabel">Edit Name</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= form_with url: user_path(@user), method: :patch, local: true do |form| %>
+          <div class="mb-3">
+            <%= form.label :name, "New Name" %>
+            <%= form.text_field :name, class: "form-control", value: @user.name %>
+          </div>
+          <div class="mb-3">
+            <%= form.submit "Save Changes", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<h2>Age : <%= @user.age %> <%= link_to '<i class="pen fa-solid fa-pen-to-square"></i>'.html_safe, "#editAgeModal", class: 'btn btn-link p-0', title: 'Edit Age', data: { bs_toggle: 'modal', bs_target: '#editAgeModal' } %></h2>
+<div class="modal fade" id="editAgeModal" tabindex="-1" aria-labelledby="editAgeModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editAgeModalLabel">Edit Age</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= form_with url: user_path(@user), method: :patch, local: true do |form| %>
+          <div class="mb-3">
+            <%= form.label :age, "New Age" %>
+            <%= form.number_field :age, class: "form-control", value: @user.age %>
+          </div>
+          <div class="mb-3">
+            <%= form.submit "Save Changes", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<h2>Gender : <%= @user.gender %> <%= link_to '<i class="pen fa-solid fa-pen-to-square"></i>'.html_safe, "#editGenderModal", class: 'btn btn-link p-0', title: 'Edit Gender', data: { bs_toggle: 'modal', bs_target: '#editGenderModal' } %></h2>
+<div class="modal fade" id="editGenderModal" tabindex="-1" aria-labelledby="editGenderModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editGenderModalLabel">Edit Gender</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= form_with url: user_path(@user), method: :patch, local: true do |form| %>
+          <div class="mb-3">
+            <%= form.label :gender, "New Gender" %>
+            <%= form.select :gender, options_for_select([['Select gender', ''], ['Male', 'Male'], ['Female', 'Female']], @user.gender), class: "form-select" %>
+          </div>
+          <div class="mb-3">
+            <%= form.submit "Save Changes", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<h2>Location : <%= @user.location %> <%= link_to '<i class="pen fa-solid fa-pen-to-square"></i>'.html_safe, "#editLocationModal", class: 'btn btn-link p-0', title: 'Edit Location', data: { bs_toggle: 'modal', bs_target: '#editLocationModal' } %></h2>
+<div class="modal fade" id="editLocationModal" tabindex="-1" aria-labelledby="editLocationModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editLocationModalLabel">Edit Location</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= form_with url: user_path(@user), method: :patch, local: true do |form| %>
+          <div class="mb-3">
+            <%= form.label :location, "New Location" %>
+            <%= form.text_field :location, class: "form-control", value: @user.location %>
+          </div>
+          <div class="mb-3">
+            <%= form.submit "Save Changes", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<h2>About me : <%= @user.description %> <%= link_to '<i class="pen fa-solid fa-pen-to-square"></i>'.html_safe, "#editDescriptionModal", class: 'btn btn-link p-0', title: 'Edit Description', data: { bs_toggle: 'modal', bs_target: '#editDescriptionModal' } %></h2>
+<div class="modal fade" id="editDescriptionModal" tabindex="-1" aria-labelledby="editDescriptionModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editDescriptionModalLabel">Edit Description</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= form_with url: user_path(@user), method: :patch, local: true do |form| %>
+          <div class="mb-3">
+            <%= form.label :description, "New Description" %>
+            <%= form.text_area :description, class: "form-control", value: @user.description %>
+          </div>
+          <div class="mb-3">
+            <%= form.submit "Save Changes", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

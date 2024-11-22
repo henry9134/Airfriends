@@ -2,7 +2,7 @@
   <div class='activity-card-pending' style="border: 1px solid #ccc; border-radius: 8px; padding: 10px; margin-bottom: 10px;">
     <div class='pending-actions d-flex justify-content-between align-items-center'>
       <div>
-        <p class="mb-0">Date: <%= request.booking_date %></p>
+        <p class="mb-0">Date: <%= request.booking_date.strftime("%A %d %B %Y") %></p>
         <p class="mb-0"><strong><%= request.user.name %></strong> | <%= request.activity.name %></p>
       </div>
       <div class="d-flex align-items-center justify-content-end" role="group" aria-label="Pending Actions">

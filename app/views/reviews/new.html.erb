@@ -1,7 +1,44 @@
-<h1>New review for <%= @user.name %>  </h1>
-<%= simple_form_for [@user, @review] do |f| %>
-  <%= f.error_notification %>
-  <%= f.input :content %>
-  <%= f.input :rating %>
-  <%= f.submit "Submit review", class: "btn btn-primary" %>
-<% end %>
+<div class="container" style="flex-grow: 1;">
+  <div class="container my-4 p-4 border rounded shadow-lg" style="background-color: #f8f9fa; max-width: 550px; margin: auto;">
+    <h1 class="text-center mb-4">Review your experience with <strong><%= @user.name %></strong></h1>
+    <%= simple_form_for [@user, @review] do |f| %>
+      <%= f.error_notification %>
+      <%= f.input :content, input_html: { class: 'form-control', placeholder: 'Write your review here...' } %>
+      <div class="star-rating mb-3">
+        <% 5.times do |i| %>
+          <input type="radio" name="review[rating]" value="<%= i + 1 %>" <%= "checked" if i == 2 %> />
+        <% end %>
+      </div>
+      <%= f.submit "Submit review", class: "btn btn-primary btn-block" %>
+    <% end %>
+  </div>
+</div>
+
+<style>
+  .star-rating {
+    input {
+      visibility: hidden;
+      margin-right: 1em;
+      font-size: 28px;
+      text-shadow: 0.5px 0.5px 3px #E67E23;
+    }
+
+    input:before {
+      cursor: pointer;
+      visibility: visible;
+      font-family: 'Font Awesome 6 Free', 'Font Awesome 5 Free';
+      content: '\f005';
+      font-weight: 900;
+      color: #FD4;
+      transition: color 0.35s;
+    }
+
+    input:hover {
+      transform: scale(1.2) translate(-10%, -10%);
+    }
+
+    input:checked ~ input:before {
+      color: #fff;
+    }
+  }
+</style>
